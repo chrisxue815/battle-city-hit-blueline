@@ -1,0 +1,7 @@
+glob:Debug/*
+glob:ipch/*
+glob:BattleCity/BattleCity.aps
+glob:BattleCity/BattleCity.vcxproj.user
+glob:BattleCity.opensdf
+glob:BattleCity.sdf
+glob:BattleCity.suo
