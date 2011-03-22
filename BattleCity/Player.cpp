@@ -19,18 +19,18 @@ Player::~Player(void)
 
 
 // @override
-void loadContent(void)
+void Player::loadContent(void)
 {
 }
 
 
 // @override
-void update(int gameTime)
+void Player::update(int gameTime)
 {
 }
 
 
 // @override
-void draw(int gameTime)
+void Player::draw(int gameTime)
 {
 }

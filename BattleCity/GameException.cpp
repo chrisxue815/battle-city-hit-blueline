@@ -24,9 +24,3 @@ GameException::GameException(const char *const what, ExceptionType type)
 {
 	this->type = type;
 }
-
-
-ExceptionType GameException::getType(void)
-{
-	return type;
-}

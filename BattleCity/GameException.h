@@ -19,6 +19,12 @@ namespace BattleCity
 		GameException(ExceptionType type);
 		GameException(const char *const what, ExceptionType type);
 
-		ExceptionType getType(void);
+		ExceptionType getType(void) const;
 	};
+
+
+	inline ExceptionType GameException::getType(void) const
+	{
+		return type;
+	}
 }

@@ -13,14 +13,20 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Exception">
-      <UniqueIdentifier>{4bc3d654-9c4f-4c7f-a4ec-25dacffe4667}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Exception">
-      <UniqueIdentifier>{569c7712-b64b-4d4d-a3b6-df13e74fe70c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\texture">
       <UniqueIdentifier>{9667ce88-b676-45a2-b2a6-cdbdaee19878}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helper">
+      <UniqueIdentifier>{ee6b7d74-b13e-43cf-abe2-ad3faa62159f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helper">
+      <UniqueIdentifier>{2f6f8a2b-d8bf-4b04-8b41-407d2dc49814}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helper\Exception">
+      <UniqueIdentifier>{4bc3d654-9c4f-4c7f-a4ec-25dacffe4667}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helper\Exception">
+      <UniqueIdentifier>{569c7712-b64b-4d4d-a3b6-df13e74fe70c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -34,48 +40,60 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameException.cpp">
-      <Filter>Source Files\Exception</Filter>
+      <Filter>Source Files\Helper\Exception</Filter>
     </ClCompile>
     <ClCompile Include="ExceptionType.h">
-      <Filter>Header Files\Exception</Filter>
-    </ClCompile>
-    <ClCompile Include="ContentManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\Helper\Exception</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Coordinate.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentManager.cpp">
+      <Filter>Source Files\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSpan.cpp">
+      <Filter>Source Files\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTime.cpp">
+      <Filter>Source Files\Helper</Filter>
     </ClCompile>
     <ClCompile Include="Painter.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Helper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameException.h">
-      <Filter>Header Files\Exception</Filter>
-    </ClInclude>
-    <ClInclude Include="ContentManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Macro.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Helper\Exception</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Coordinate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Painter.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Coordinate.h">
+      <Filter>Header Files\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentManager.h">
+      <Filter>Header Files\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Macro.h">
+      <Filter>Header Files\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeSpan.h">
+      <Filter>Header Files\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTime.h">
+      <Filter>Header Files\Helper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

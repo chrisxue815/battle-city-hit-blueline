@@ -82,9 +82,11 @@
     <ClCompile Include="ExceptionType.h" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameException.cpp" />
+    <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Painter.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="TimeSpan.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentManager.h" />
@@ -92,9 +94,11 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameException.h" />
+    <ClInclude Include="GameTime.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Painter.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="TimeSpan.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="content\texture\base.bmp" />

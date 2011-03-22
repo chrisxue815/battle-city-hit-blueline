@@ -14,18 +14,37 @@ Game::~Game(void)
 		destroy_bitmap(buffer);
 }
 
-
 void Game::execute(void)
 {
-	while (true)
-	{
-		acquire_screen();
-		blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-		release_screen();
+	GameTime gameTime = GameTime::begin(refreshRate);
 
-		if (keypressed())
-			break;
+	while (running)
+	{
+		if (gameTime.next())
+		{
+			update(gameTime);
+			draw(gameTime);
+		}
 	}
+}
+
+
+void Game::update(const GameTime & gameTime)
+{
+	if (keypressed())
+		running = false;
+}
+
+
+void Game::draw(const GameTime & gameTime)
+{
+	char buf[100];
+	uszprintf(buf, sizeof(buf), "%d", gameTime.getFps());
+
+	acquire_screen();
+	textout_ex(buffer, font, buf, 10, 10, makecol(255,255,255), makecol(0,0,0));
+	blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+	release_screen();
 }
 
 
@@ -34,7 +53,6 @@ void Game::init()
 	initGraphics();
 	install_keyboard();
 	install_timer();
-	retrace_count;
 	initData();
 }
 
@@ -63,12 +81,15 @@ void Game::initGraphics(void)
 
 void Game::initData(void)
 {
-	//buffer = create_bitmap(SCREEN_W, SCREEN_H);
-
 	get_executable_name(exePath, sizeof(exePath));
 	replace_filename(dirPath, exePath, "", sizeof(dirPath));
 
 	content.init(dirPath);
 	content.setRootDirectory("content");
-	buffer = content.loadBitmap("texture\\test.bmp");
+
+	buffer = create_bitmap(SCREEN_W, SCREEN_H);
+
+	refreshRate = get_refresh_rate();
+
+	running = true;
 }
