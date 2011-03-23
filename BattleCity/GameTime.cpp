@@ -22,7 +22,7 @@ END_OF_FUNCTION(fps_proc);
 
 
 GameTime::GameTime(void)
-	: timeSpan(60)
+	: interval(60)
 {
 	LOCK_VARIABLE(gameTicks);
 	LOCK_FUNCTION(gameTicks_proc);
@@ -31,32 +31,31 @@ GameTime::GameTime(void)
 	LOCK_VARIABLE(fps);
 	LOCK_FUNCTION(fps_proc);
 	install_int(fps_proc, 1000);
+
+	ticks = 0;
+	refreshRate = 0;
 }
 
 
 // @static
-const GameTime & GameTime::begin(int refreshRate)
+GameTime & GameTime::getInstance(void)
 {
 	static GameTime instance;
-
-	if (instance.refreshRate != refreshRate)
-	{
-		instance.init(refreshRate);
-	}
-
-	instance.ticks = gameTicks;
 
 	return instance;
 }
 
 
-void GameTime::init(int refreshRate)
+void GameTime::begin(int refreshRate)
 {
-	this->refreshRate = refreshRate;
+	if (this->refreshRate != refreshRate)
+	{
+		this->refreshRate = refreshRate;
+		remove_int(gameTicks_proc);
+		install_int_ex(gameTicks_proc, BPS_TO_TIMER(refreshRate));
+	}
 
-	remove_int(gameTicks_proc);
-
-	install_int_ex(gameTicks_proc, BPS_TO_TIMER(refreshRate));
+	this->ticks = gameTicks;
 }
 
 
@@ -64,11 +63,13 @@ bool GameTime::next(void)
 {
 	int retraceCount = gameTicks;
 
-	if (ticks < retraceCount)
+	int intervalTicks = retraceCount - ticks;
+
+	if (intervalTicks > 0)
 	{
-		intervalTicks = ticks - retraceCount;
 		ticks = retraceCount;
 		++frameCount;
+		interval.setTicks(intervalTicks);
 		return true;
 	}
 	else

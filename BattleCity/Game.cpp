@@ -4,47 +4,14 @@ using namespace BattleCity;
 
 Game::Game(void)
 {
-	buffer = NULL;
+	level = new Level(*this);
+	gameTime = & GameTime::getInstance();
 }
 
 
 Game::~Game(void)
 {
-	if (buffer != NULL)
-		destroy_bitmap(buffer);
-}
-
-void Game::execute(void)
-{
-	GameTime gameTime = GameTime::begin(refreshRate);
-
-	while (running)
-	{
-		if (gameTime.next())
-		{
-			update(gameTime);
-			draw(gameTime);
-		}
-	}
-}
-
-
-void Game::update(const GameTime & gameTime)
-{
-	if (keypressed())
-		running = false;
-}
-
-
-void Game::draw(const GameTime & gameTime)
-{
-	char buf[100];
-	uszprintf(buf, sizeof(buf), "%d", gameTime.getFps());
-
-	acquire_screen();
-	textout_ex(buffer, font, buf, 10, 10, makecol(255,255,255), makecol(0,0,0));
-	blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-	release_screen();
+	delete level;
 }
 
 
@@ -84,12 +51,49 @@ void Game::initData(void)
 	get_executable_name(exePath, sizeof(exePath));
 	replace_filename(dirPath, exePath, "", sizeof(dirPath));
 
-	content.init(dirPath);
-	content.setRootDirectory("content");
-
-	buffer = create_bitmap(SCREEN_W, SCREEN_H);
+	resource.init(dirPath);
+	resource.setRootDirectory("resource");
+	drawing.init();
 
 	refreshRate = get_refresh_rate();
 
 	running = true;
+
+	level->init(resource);
+	monitor.init(resource);
+}
+
+
+void Game::execute(void)
+{
+	gameTime->begin(refreshRate);
+
+	while (running)
+	{
+		if (gameTime->next())
+		{
+			update();
+			draw();
+		}
+	}
+}
+
+
+void Game::update(void)
+{
+	level->update();
+	monitor.update();
+	monitor.showFps(*gameTime);
+	monitor.showPlayerPoint(level->getPlayer());
+	if (keypressed() && key[KEY_ESC])
+		running = false;
+}
+
+
+void Game::draw(void)
+{
+	drawing.clear();
+	level->draw(drawing);
+	monitor.draw(drawing);
+	drawing.flush();
 }

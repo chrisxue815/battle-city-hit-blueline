@@ -1,30 +1,30 @@
-#include "ContentManager.h"
+#include "ResourceManager.h"
 using namespace BattleCity;
 
 
-ContentManager::ContentManager(void)
+ResourceManager::ResourceManager(void)
 {
 }
 
 
-ContentManager::~ContentManager(void)
+ResourceManager::~ResourceManager(void)
 {
 }
 
 
-void ContentManager::init(char * dirPath)
+void ResourceManager::init(char * dirPath)
 {
-	strcpy(this->dirPath, dirPath);
+	ustrzncpy(this->dirPath, sizeof(this->dirPath), dirPath, sizeof(this->dirPath));
 }
 
 
-void ContentManager::setRootDirectory(char * rootPath)
+void ResourceManager::setRootDirectory(char * rootPath)
 {
 	append_filename(this->rootPath, dirPath, rootPath, sizeof(this->rootPath));
 }
 
 
-BITMAP * ContentManager::loadBitmap(const char * fileName)
+BITMAP * ResourceManager::loadBitmap(const char * fileName) const
 {
 	char filePath[MAX_PATH_SIZE];
 	append_filename(filePath, rootPath, fileName, sizeof(filePath));

@@ -1,18 +1,15 @@
 #include "Entity.h"
+#include "Game.h"
 using namespace BattleCity;
 
 
-Entity::Entity(void)
+Entity::Entity(const Game & game)
+	: game(game)
 {
 }
 
 
-Entity::Entity(const Coordinate & value)
-{
-	this->coor = value;
-}
-
-
-Entity::~Entity(void)
+Entity::Entity(const Game & game, const Point & point)
+	: game(game), point(point)
 {
 }

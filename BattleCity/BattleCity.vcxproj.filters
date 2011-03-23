@@ -22,11 +22,17 @@
     <Filter Include="Source Files\Helper">
       <UniqueIdentifier>{2f6f8a2b-d8bf-4b04-8b41-407d2dc49814}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Helper\Exception">
+    <Filter Include="Header Files\Drawing">
+      <UniqueIdentifier>{2803db9c-c700-46b3-967f-2994bfb4f6b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Exception">
       <UniqueIdentifier>{4bc3d654-9c4f-4c7f-a4ec-25dacffe4667}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Helper\Exception">
+    <Filter Include="Source Files\Exception">
       <UniqueIdentifier>{569c7712-b64b-4d4d-a3b6-df13e74fe70c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Drawing">
+      <UniqueIdentifier>{2ee3dad3-7065-47fa-8610-5180d39861fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,19 +46,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameException.cpp">
-      <Filter>Source Files\Helper\Exception</Filter>
+      <Filter>Source Files\Exception</Filter>
     </ClCompile>
     <ClCompile Include="ExceptionType.h">
-      <Filter>Header Files\Helper\Exception</Filter>
+      <Filter>Header Files\Exception</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Coordinate.cpp">
-      <Filter>Source Files\Helper</Filter>
-    </ClCompile>
-    <ClCompile Include="ContentManager.cpp">
-      <Filter>Source Files\Helper</Filter>
     </ClCompile>
     <ClCompile Include="TimeSpan.cpp">
       <Filter>Source Files\Helper</Filter>
@@ -60,8 +60,29 @@
     <ClCompile Include="GameTime.cpp">
       <Filter>Source Files\Helper</Filter>
     </ClCompile>
-    <ClCompile Include="Painter.cpp">
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateMonitor.cpp">
       <Filter>Source Files\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Source Files\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawingManager.cpp">
+      <Filter>Source Files\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelDrawing.cpp">
+      <Filter>Source Files\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageDrawing.cpp">
+      <Filter>Source Files\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationDrawing.cpp">
+      <Filter>Source Files\Drawing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,22 +90,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameException.h">
-      <Filter>Header Files\Helper\Exception</Filter>
+      <Filter>Header Files\Exception</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Painter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files\Helper</Filter>
-    </ClInclude>
-    <ClInclude Include="Coordinate.h">
-      <Filter>Header Files\Helper</Filter>
-    </ClInclude>
-    <ClInclude Include="ContentManager.h">
-      <Filter>Header Files\Helper</Filter>
     </ClInclude>
     <ClInclude Include="Macro.h">
       <Filter>Header Files\Helper</Filter>
@@ -95,36 +104,69 @@
     <ClInclude Include="GameTime.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateMonitor.h">
+      <Filter>Header Files\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Header Files\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawingManager.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelDrawing.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageDrawing.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationDrawing.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>Header Files\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="IEntityDrawing.h">
+      <Filter>Header Files\Drawing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="content\texture\steel.bmp">
+    <CustomBuild Include="resource\texture\pool.bmp">
       <Filter>Resource Files\texture</Filter>
     </CustomBuild>
-    <CustomBuild Include="content\texture\pool.bmp">
+    <CustomBuild Include="resource\texture\player.bmp">
       <Filter>Resource Files\texture</Filter>
     </CustomBuild>
-    <CustomBuild Include="content\texture\levelbg.bmp">
+    <CustomBuild Include="resource\texture\levelbg.bmp">
       <Filter>Resource Files\texture</Filter>
     </CustomBuild>
-    <CustomBuild Include="content\texture\gamebg.bmp">
+    <CustomBuild Include="resource\texture\gamebg.bmp">
       <Filter>Resource Files\texture</Filter>
     </CustomBuild>
-    <CustomBuild Include="content\texture\enemy.bmp">
+    <CustomBuild Include="resource\texture\enemy.bmp">
       <Filter>Resource Files\texture</Filter>
     </CustomBuild>
-    <CustomBuild Include="content\texture\bush.bmp">
+    <CustomBuild Include="resource\texture\bush.bmp">
       <Filter>Resource Files\texture</Filter>
     </CustomBuild>
-    <CustomBuild Include="content\texture\bullet.bmp">
+    <CustomBuild Include="resource\texture\bullet.bmp">
       <Filter>Resource Files\texture</Filter>
     </CustomBuild>
-    <CustomBuild Include="content\texture\brick.bmp">
+    <CustomBuild Include="resource\texture\brick.bmp">
       <Filter>Resource Files\texture</Filter>
     </CustomBuild>
-    <CustomBuild Include="content\texture\tank.bmp">
+    <CustomBuild Include="resource\texture\steel.bmp">
       <Filter>Resource Files\texture</Filter>
     </CustomBuild>
-    <CustomBuild Include="content\texture\base.bmp">
+    <CustomBuild Include="resource\texture\base.bmp">
       <Filter>Resource Files\texture</Filter>
     </CustomBuild>
   </ItemGroup>

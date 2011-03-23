@@ -52,6 +52,6 @@ namespace BattleCity
 
 	inline void TimeSpan::setMilliseconds(int milliseconds)
 	{
-		this->ticks = refreshRate * milliseconds * 60 / 1000;
+		this->ticks = refreshRate * milliseconds  / 1000;
 	}
 }

@@ -1,9 +1,12 @@
 #pragma once
 
 #include "GameException.h"
-#include "ContentManager.h"
+#include "ResourceManager.h"
+#include "DrawingManager.h"
 #include "GameTime.h"
 #include "TimeSpan.h"
+#include "Level.h"
+#include "GameStateMonitor.h"
 #include <allegro.h>
 
 
@@ -22,9 +25,16 @@ namespace BattleCity
 
 		bool running;
 
-		BITMAP * buffer;
+		ResourceManager resource;
+		DrawingManager drawing;
+		GameTime * gameTime;
 
-		ContentManager content;
+		Level * level;
+		GameStateMonitor monitor;
+
+	public:
+		int getFreshRate(void) const;
+		const GameTime & getGameTime(void) const;
 
 	public:
 		Game(void);
@@ -33,10 +43,8 @@ namespace BattleCity
 		void init();
 		void execute(void);
 
-		void update(const GameTime & gameTime);
-		void draw(const GameTime & gameTime);
-
-		int getFreshRate(void) const;
+		void update(void);
+		void draw(void);
 
 	private:
 		void initGraphics(void);
@@ -44,8 +52,11 @@ namespace BattleCity
 	};
 
 
-	inline int Game::getFreshRate(void) const
-	{
+	inline int Game::getFreshRate(void) const {
 		return refreshRate;
+	}
+
+	inline const GameTime & Game::getGameTime(void) const {
+		return *gameTime;
 	}
 }

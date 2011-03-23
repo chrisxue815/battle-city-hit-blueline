@@ -11,30 +11,33 @@ namespace BattleCity
 	{
 	protected:
 		int ticks;
-		int intervalTicks;
 		int refreshRate;
-		TimeSpan timeSpan;
+		TimeSpan interval;
 
 	protected:
 		GameTime(void);
 
 	public:
-		static const GameTime & begin(int refreshRate);
+		static GameTime & getInstance(void);
 
 	public:
+		void begin(int refreshRate);
 		bool next(void);
 		void update(void);
 
+		int getRefreshRate(void) const;
 		int getFps(void) const;
 		const TimeSpan & getInterval(void) const;
-
-	protected:
-		void init(int refreshRate);
 	};
 
 
+	inline int GameTime::getRefreshRate(void) const
+	{
+		return refreshRate;
+	}
+
 	inline const TimeSpan & GameTime::getInterval(void) const
 	{
-		return timeSpan;
+		return interval;
 	}
 }

@@ -1,38 +1,44 @@
 #pragma once
 
-#include "Coordinate.h"
+#include "IComponent.h"
+#include "Point.h"
+#include "ResourceManager.h"
+#include "GameTime.h"
 
 
 namespace BattleCity
 {
+	class Game;
+
 	class Entity
 	{
 	protected:
-		Coordinate coor;
+		Point point;
+		const Game & game;
 
 	public:
-		const Coordinate & getCoordinate(void) const;
-		void setCoordinate(const Coordinate &);
+		virtual const Point & getPoint(void) const;
+		virtual void setPoint(const Point &);
+
+	protected:
+		Entity(const Game & game);
+		Entity(const Game & game, const Point &);
 
 	public:
-		Entity(void);
-		Entity(const Coordinate &);
-		~Entity(void);
-
-		virtual void loadContent(void) = 0;
-		virtual void update(int gameTime) = 0;
-		virtual void draw(int gameTime) = 0;
+		virtual void init(const ResourceManager & resource) = 0;
+		virtual void update(void) = 0;
+		virtual void draw(DrawingManager & drawing) = 0;
 	};
 
 
-	inline const Coordinate & Entity::getCoordinate(void) const
+	inline const Point & Entity::getPoint(void) const
 	{
-		return coor;
+		return point;
 	}
 
 
-	inline void Entity::setCoordinate(const Coordinate & value)
+	inline void Entity::setPoint(const Point & value)
 	{
-		this->coor = value;
+		this->point = value;
 	}
 }

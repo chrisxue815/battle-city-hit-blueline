@@ -1,23 +1,31 @@
 #pragma once
 
-#include "Game.h"
 #include "Entity.h"
+#include "ImageDrawing.h"
 
 
 namespace BattleCity
 {
 	class Player : public Entity
 	{
+	protected:
+		int milliseconds;
+		
+		enum Move {NONE, LEFT_RIGHT, UP_DOWN};
+		Move lastMove;
+
+		ImageDrawing image;
+
 	public:
-		Player(void);
-		Player(const Coordinate &);
+		Player(const Game & game);
+		Player(const Game & game, const Point &);
 		~Player(void);
 
 		// @override
-		void loadContent(void);
+		void init(const ResourceManager & resource);
 		// @override
-		void update(int gameTime);
+		void update(void);
 		// @override
-		void draw(int gameTime);
+		void draw(DrawingManager & drawing);
 	};
 }

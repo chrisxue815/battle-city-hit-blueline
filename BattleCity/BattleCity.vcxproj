@@ -76,41 +76,53 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ContentManager.cpp" />
-    <ClCompile Include="Coordinate.cpp" />
+    <ClCompile Include="AnimationDrawing.cpp" />
+    <ClCompile Include="DrawingManager.cpp" />
+    <ClCompile Include="ImageDrawing.cpp" />
+    <ClCompile Include="LevelDrawing.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="Point.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="ExceptionType.h" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameException.cpp" />
     <ClCompile Include="GameTime.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Painter.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="GameStateMonitor.cpp" />
     <ClCompile Include="TimeSpan.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ContentManager.h" />
-    <ClInclude Include="Coordinate.h" />
+    <ClInclude Include="AnimationDrawing.h" />
+    <ClInclude Include="DrawingManager.h" />
+    <ClInclude Include="IComponent.h" />
+    <ClInclude Include="ImageDrawing.h" />
+    <ClInclude Include="LevelDrawing.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameException.h" />
     <ClInclude Include="GameTime.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Macro.h" />
-    <ClInclude Include="Painter.h" />
+    <ClInclude Include="IEntityDrawing.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="GameStateMonitor.h" />
     <ClInclude Include="TimeSpan.h" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="content\texture\base.bmp" />
-    <CustomBuild Include="content\texture\brick.bmp" />
-    <CustomBuild Include="content\texture\bullet.bmp" />
-    <CustomBuild Include="content\texture\bush.bmp" />
-    <CustomBuild Include="content\texture\enemy.bmp" />
-    <CustomBuild Include="content\texture\gamebg.bmp" />
-    <CustomBuild Include="content\texture\levelbg.bmp" />
-    <CustomBuild Include="content\texture\pool.bmp" />
-    <CustomBuild Include="content\texture\steel.bmp" />
-    <CustomBuild Include="content\texture\tank.bmp" />
+    <CustomBuild Include="resource\texture\base.bmp" />
+    <CustomBuild Include="resource\texture\brick.bmp" />
+    <CustomBuild Include="resource\texture\bullet.bmp" />
+    <CustomBuild Include="resource\texture\bush.bmp" />
+    <CustomBuild Include="resource\texture\enemy.bmp" />
+    <CustomBuild Include="resource\texture\gamebg.bmp" />
+    <CustomBuild Include="resource\texture\levelbg.bmp" />
+    <CustomBuild Include="resource\texture\player.bmp" />
+    <CustomBuild Include="resource\texture\pool.bmp" />
+    <CustomBuild Include="resource\texture\steel.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

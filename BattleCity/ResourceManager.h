@@ -7,19 +7,19 @@
 
 namespace BattleCity
 {
-	class ContentManager
+	class ResourceManager
 	{
 	private:
 		char dirPath[MAX_PATH_SIZE];
 		char rootPath[MAX_PATH_SIZE];
 
 	public:
-		ContentManager(void);
-		~ContentManager(void);
+		ResourceManager(void);
+		~ResourceManager(void);
 
 		void init(char * dirPath);
 		void setRootDirectory(char * rootPath);
 
-		BITMAP * loadBitmap(const char * fileName);
+		BITMAP * loadBitmap(const char * fileName) const;
 	};
 }
