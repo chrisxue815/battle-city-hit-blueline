@@ -9,6 +9,9 @@ namespace BattleCity
 {
 	class Game;
 
+	/**
+		*Component是一个能在Game中运行的类；
+	*/
 	class Component
 	{
 	protected:
