@@ -1,8 +1,9 @@
 #pragma once
 
-#include "IComponent.h"
+#include "Game.h"
+#include "Component.h"
 #include "ResourceManager.h"
-#include "GameTime.h"
+#include "TimeManager.h"
 #include "Player.h"
 #include "Point.h"
 #include <allegro.h>
@@ -10,23 +11,27 @@
 
 namespace BattleCity
 {
-	class GameStateMonitor : public IComponent
+	class GameStateMonitor : public Component
 	{
 	protected:
 		char notification[100];
 
 	public:
-		GameStateMonitor(void);
-		~GameStateMonitor(void);
+		GameStateMonitor(Game & game);
 
 		// @override
-		void init(const ResourceManager & resource);
+		void init(void);
 		// @override
 		void update(void);
 		// @override
-		void draw(DrawingManager & drawing);
+		void draw(void);
 
-		void showFps(const GameTime & gameTime);
+		void showFps(const TimeManager & timeManager);
 		void showPlayerPoint(const Player & player);
 	};
+
+	inline GameStateMonitor::GameStateMonitor(Game & game)
+		: Component(game)
+	{
+	}
 }

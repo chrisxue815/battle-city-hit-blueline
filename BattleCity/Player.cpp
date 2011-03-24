@@ -1,89 +1,136 @@
-#include "Game.h"
 #include "Player.h"
+#include "Level.h"
 using namespace BattleCity;
 
 
-Player::Player(const Game & game)
-	: Entity(game)
+Player::Player(Level & level)
+	: Entity(level)
 {
+	xOffset = 0;
+	yOffset = 0;
+	texture = NULL;
 }
 
 
-Player::Player(const Game & game, const Point & point)
-	: Entity(game, point)
+Player::Player(Level & level, const Point & point)
+	: Entity(level, point)
 {
+	xOffset = 0;
+	yOffset = 0;
+	texture = NULL;
 }
 
 
 Player::~Player(void)
 {
+	if (texture != NULL)
+		destroy_bitmap(texture);
 }
 
 
 // @override
-void Player::init(const ResourceManager & resource)
+void Player::init(void)
 {
-	int milliseconds = 0;
-	int lastKey = 0;
-	image.init(resource, "texture\\player.bmp");
+	lastMove = NONE;
+
+	const ResourceManager & resource = level.getResourceManager();
+	texture = resource.loadBitmap("texture\\player.bmp");
 }
 
 
 // @override
 void Player::update(void)
 {
-	const GameTime & gameTime = game.getGameTime();
+	const TimeManager * timeManager = level.getTimeManager();
+	int milliseconds = timeManager->getInterval().getMilliseconds();
 
 	// move
-	int xOffset = 0;
-	int yOffset = 0;
+	int xMove = 0;
+	int yMove = 0;
 
 	if (key[KEY_LEFT]) {
-		xOffset -= 1;
+		xMove -= 1;
 	}
 	if (key[KEY_RIGHT]) {
-		xOffset += 1;
+		xMove += 1;
 	}
 	if (key[KEY_UP]) {
-		yOffset -= 1;
+		yMove -= 1;
 	}
 	if (key[KEY_DOWN]) {
-		yOffset += 1;
+		yMove += 1;
 	}
 
-	if (xOffset != 0 && yOffset != 0)
+	if (xMove != 0 && yMove != 0)
 	{
-		if (lastMove == UP_DOWN)
-			yOffset = 0;
+		if (lastMove == UP || lastMove == DOWN)
+			yMove = 0;
 		else
-			xOffset = 0;
+			xMove = 0;
 	}
 
-	if (xOffset != 0)
-		lastMove = LEFT_RIGHT;
-	else if (yOffset != 0)
-		lastMove = UP_DOWN;
-	else
-		lastMove = NONE;
-
-	if (lastMove == NONE)
+	if (xMove > 0)
 	{
-		milliseconds = 0;
-	}
-	else
-	{
-		milliseconds += gameTime.getInterval().getMilliseconds();
-		if (milliseconds >= 500)
+		lastMove = LEFT;
+		xOffset += milliseconds;
+		yOffset = 0;
+		if (xOffset >= MS_PER_GRID / 2)
 		{
-			milliseconds -= 500;
-			point += Point(xOffset, yOffset);
+			xOffset -= MS_PER_GRID;
+			point += Point(1, 0);
 		}
+	}
+	else if (xMove < 0)
+	{
+		lastMove = RIGHT;
+		xOffset -= milliseconds;
+		yOffset = 0;
+		if (xOffset <= -MS_PER_GRID / 2)
+		{
+			xOffset += MS_PER_GRID;
+			point -= Point(1, 0);
+		}
+	}
+	else if (yMove > 0)
+	{
+		lastMove = UP;
+		yOffset += milliseconds;
+		if (yOffset >= MS_PER_GRID / 2)
+		{
+			yOffset -= MS_PER_GRID;
+			point += Point(0, 1);
+		}
+	}
+	else if (yMove < 0)
+	{
+		lastMove = DOWN;
+		yOffset -= milliseconds;
+		if (yOffset <= -MS_PER_GRID / 2)
+		{
+			yOffset += MS_PER_GRID;
+			point -= Point(0, 1);
+		}
+	}
+	else
+	{
+		lastMove = NONE;
 	}
 }
 
 
 // @override
-void Player::draw(DrawingManager & drawing)
+void Player::draw(void)
 {
-	//image.draw(
+	const LevelDrawing & levelDrawing = level.getLevelDrawing();
+	Point screenPoint = levelDrawing.getScreenPoint(point);
+	const Point & gridSize = levelDrawing.getGridSize();
+	
+	int x = Math::floorDiv(xOffset * gridSize.getX(), MS_PER_GRID) + screenPoint.getX();
+	screenPoint.setX(x);
+	int y = Math::floorDiv(yOffset * gridSize.getY(), MS_PER_GRID) + screenPoint.getY();
+	screenPoint.setY(y);
+
+	DrawingManager & drawing = level.getDrawingManager();
+
+	draw_sprite(drawing.getBuffer(), texture, screenPoint.getX(), screenPoint.getY());
 }

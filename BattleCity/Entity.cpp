@@ -1,15 +1,15 @@
 #include "Entity.h"
-#include "Game.h"
+#include "Level.h"
 using namespace BattleCity;
 
 
-Entity::Entity(const Game & game)
-	: game(game)
+Entity::Entity(Level & level)
+	: level(level)
 {
 }
 
 
-Entity::Entity(const Game & game, const Point & point)
-	: game(game), point(point)
+Entity::Entity(Level & level, const Point & point)
+	: level(level), point(point)
 {
 }

@@ -1,43 +1,72 @@
 #pragma once
 
+#include "Game.h"
 #include "Player.h"
-#include "GameTime.h"
+#include "TimeManager.h"
+#include "LevelDrawing.h"
 #include <allegro.h>
 #include <vector>
 
 
 namespace BattleCity
 {
-	class Game;
-
-	class Level : public IComponent
+	class Level : public Component
 	{
 	protected:
-		const Game & game;
-
 		typedef vector<int> vector1;
 		typedef vector<vector1> vector2;
 
 		vector2 board;
-		Player player;
+
+		Player * player;
+
+		LevelDrawing levelDrawing;
 
 	public:
-		const Player & getPlayer(void) const;
+		int getRefreshRate(void) const;
+		const TimeManager * getTimeManager(void) const;
+		const ResourceManager & getResourceManager(void) const;
+		DrawingManager & getDrawingManager(void);
+
+		const LevelDrawing & getLevelDrawing(void) const;
 
 	public:
-		Level(const Game & game);
+		const Player * getPlayer(void) const;
+
+	public:
+		Level(Game & game);
+		~Level(void);
 
 		// @override
-		void init(const ResourceManager & resource);
+		void init(void);
 		// @override
 		void update(void);
 		// @override
-		void draw(DrawingManager & drawing);
+		void draw(void);
 	};
 
 
-	inline const Player & Level::getPlayer(void) const
-	{
+	inline int Level::getRefreshRate(void) const {
+		return game.getRefreshRate();
+	}
+
+	inline const TimeManager * Level::getTimeManager(void) const {
+		return game.getTimeManager();
+	}
+
+	inline const ResourceManager & Level::getResourceManager(void) const {
+		return game.getResourceManager();
+	}
+
+	inline DrawingManager & Level::getDrawingManager(void) {
+		return game.getDrawingManager();
+	}
+
+	inline const Player * Level::getPlayer(void) const {
 		return player;
+	}
+
+	inline const LevelDrawing & Level::getLevelDrawing(void) const {
+		return levelDrawing;
 	}
 }

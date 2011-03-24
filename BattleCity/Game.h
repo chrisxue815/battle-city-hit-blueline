@@ -3,15 +3,16 @@
 #include "GameException.h"
 #include "ResourceManager.h"
 #include "DrawingManager.h"
-#include "GameTime.h"
+#include "TimeManager.h"
 #include "TimeSpan.h"
-#include "Level.h"
-#include "GameStateMonitor.h"
 #include <allegro.h>
 
 
 namespace BattleCity
 {
+	class Level;
+	class GameStateMonitor;
+
 	class Game
 	{
 	protected:
@@ -25,16 +26,18 @@ namespace BattleCity
 
 		bool running;
 
+		TimeManager * timeManager;
 		ResourceManager resource;
 		DrawingManager drawing;
-		GameTime * gameTime;
 
 		Level * level;
-		GameStateMonitor monitor;
+		GameStateMonitor * monitor;
 
 	public:
-		int getFreshRate(void) const;
-		const GameTime & getGameTime(void) const;
+		int getRefreshRate(void) const;
+		const TimeManager * getTimeManager(void) const;
+		const ResourceManager & getResourceManager(void) const;
+		DrawingManager & getDrawingManager(void);
 
 	public:
 		Game(void);
@@ -52,11 +55,19 @@ namespace BattleCity
 	};
 
 
-	inline int Game::getFreshRate(void) const {
+	inline int Game::getRefreshRate(void) const {
 		return refreshRate;
 	}
 
-	inline const GameTime & Game::getGameTime(void) const {
-		return *gameTime;
+	inline const TimeManager * Game::getTimeManager(void) const {
+		return timeManager;
+	}
+
+	inline const ResourceManager & Game::getResourceManager(void) const {
+		return resource;
+	}
+
+	inline DrawingManager & Game::getDrawingManager(void) {
+		return drawing;
 	}
 }

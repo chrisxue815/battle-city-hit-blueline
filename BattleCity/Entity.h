@@ -1,33 +1,33 @@
 #pragma once
 
-#include "IComponent.h"
+#include "Component.h"
 #include "Point.h"
 #include "ResourceManager.h"
-#include "GameTime.h"
+#include "TimeManager.h"
 
 
 namespace BattleCity
 {
-	class Game;
+	class Level;
 
 	class Entity
 	{
 	protected:
+		Level & level;
 		Point point;
-		const Game & game;
 
 	public:
 		virtual const Point & getPoint(void) const;
 		virtual void setPoint(const Point &);
 
 	protected:
-		Entity(const Game & game);
-		Entity(const Game & game, const Point &);
+		Entity(Level & level);
+		Entity(Level & level, const Point &);
 
 	public:
-		virtual void init(const ResourceManager & resource) = 0;
+		virtual void init(void) = 0;
 		virtual void update(void) = 0;
-		virtual void draw(DrawingManager & drawing) = 0;
+		virtual void draw(void) = 0;
 	};
 
 

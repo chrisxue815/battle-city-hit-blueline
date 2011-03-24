@@ -34,6 +34,12 @@
     <Filter Include="Source Files\Drawing">
       <UniqueIdentifier>{2ee3dad3-7065-47fa-8610-5180d39861fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Manager">
+      <UniqueIdentifier>{adb461f9-9cc3-4aa8-a9ec-4287a8685f61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Manager">
+      <UniqueIdentifier>{3faca13d-5900-4380-9f48-1b20d3b5c5e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,12 +60,6 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TimeSpan.cpp">
-      <Filter>Source Files\Helper</Filter>
-    </ClCompile>
-    <ClCompile Include="GameTime.cpp">
-      <Filter>Source Files\Helper</Filter>
-    </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -69,20 +69,26 @@
     <ClCompile Include="Point.cpp">
       <Filter>Source Files\Helper</Filter>
     </ClCompile>
-    <ClCompile Include="DrawingManager.cpp">
-      <Filter>Source Files\Drawing</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Source Files\Drawing</Filter>
-    </ClCompile>
     <ClCompile Include="LevelDrawing.cpp">
-      <Filter>Source Files\Drawing</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageDrawing.cpp">
       <Filter>Source Files\Drawing</Filter>
     </ClCompile>
     <ClCompile Include="AnimationDrawing.cpp">
       <Filter>Source Files\Drawing</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawingManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSpan.cpp">
+      <Filter>Source Files\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Source Files\Helper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,9 +107,6 @@
     <ClInclude Include="TimeSpan.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="GameTime.h">
-      <Filter>Header Files\Helper</Filter>
-    </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -116,26 +119,26 @@
     <ClInclude Include="Point.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Header Files\Drawing</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawingManager.h">
-      <Filter>Header Files\Drawing</Filter>
-    </ClInclude>
     <ClInclude Include="LevelDrawing.h">
-      <Filter>Header Files\Drawing</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageDrawing.h">
       <Filter>Header Files\Drawing</Filter>
     </ClInclude>
     <ClInclude Include="AnimationDrawing.h">
       <Filter>Header Files\Drawing</Filter>
     </ClInclude>
-    <ClInclude Include="IComponent.h">
+    <ClInclude Include="TimeManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawingManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="IEntityDrawing.h">
-      <Filter>Header Files\Drawing</Filter>
+    <ClInclude Include="Math.h">
+      <Filter>Header Files\Helper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

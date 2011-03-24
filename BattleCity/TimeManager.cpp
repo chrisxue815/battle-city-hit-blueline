@@ -1,4 +1,4 @@
-#include "GameTime.h"
+#include "TimeManager.h"
 using namespace BattleCity;
 
 
@@ -21,7 +21,7 @@ static void fps_proc(void)
 END_OF_FUNCTION(fps_proc);
 
 
-GameTime::GameTime(void)
+TimeManager::TimeManager(void)
 	: interval(60)
 {
 	LOCK_VARIABLE(gameTicks);
@@ -38,15 +38,15 @@ GameTime::GameTime(void)
 
 
 // @static
-GameTime & GameTime::getInstance(void)
+TimeManager & TimeManager::getInstance(void)
 {
-	static GameTime instance;
+	static TimeManager instance;
 
 	return instance;
 }
 
 
-void GameTime::begin(int refreshRate)
+void TimeManager::begin(int refreshRate)
 {
 	if (this->refreshRate != refreshRate)
 	{
@@ -59,7 +59,7 @@ void GameTime::begin(int refreshRate)
 }
 
 
-bool GameTime::next(void)
+bool TimeManager::next(void)
 {
 	int retraceCount = gameTicks;
 
@@ -81,7 +81,7 @@ bool GameTime::next(void)
 }
 
 
-int GameTime::getFps(void) const
+int TimeManager::getFps(void) const
 {
 	return fps;
 }

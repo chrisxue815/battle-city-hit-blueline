@@ -7,7 +7,7 @@
 namespace BattleCity
 {
 	// @static
-	class GameTime
+	class TimeManager
 	{
 	protected:
 		int ticks;
@@ -15,10 +15,10 @@ namespace BattleCity
 		TimeSpan interval;
 
 	protected:
-		GameTime(void);
+		TimeManager(void);
 
 	public:
-		static GameTime & getInstance(void);
+		static TimeManager & getInstance(void);
 
 	public:
 		void begin(int refreshRate);
@@ -31,12 +31,12 @@ namespace BattleCity
 	};
 
 
-	inline int GameTime::getRefreshRate(void) const
+	inline int TimeManager::getRefreshRate(void) const
 	{
 		return refreshRate;
 	}
 
-	inline const TimeSpan & GameTime::getInterval(void) const
+	inline const TimeSpan & TimeManager::getInterval(void) const
 	{
 		return interval;
 	}

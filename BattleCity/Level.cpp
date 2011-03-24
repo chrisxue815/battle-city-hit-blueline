@@ -2,25 +2,32 @@
 using namespace BattleCity;
 
 
-Level::Level(const Game & game)
-	: game(game), player(game)
+Level::Level(Game & game)
+	: Component(game), levelDrawing(Point(16,16), Point(16,16), 1.0f)
 {
+	player = new Player(*this);
 }
 
 
-void Level::init(const ResourceManager & resource)
+Level::~Level(void)
 {
-	player.init(resource);
+	delete player;
+}
+
+
+void Level::init(void)
+{
+	player->init();
 }
 
 
 void Level::update(void)
 {
-	player.update();
+	player->update();
 }
 
 
-void Level::draw(DrawingManager & drawing)
+void Level::draw(void)
 {
-	player.draw(drawing);
+	player->draw();
 }

@@ -1,17 +1,21 @@
 #include "Game.h"
+#include "Level.h"
+#include "GameStateMonitor.h"
 using namespace BattleCity;
 
 
 Game::Game(void)
 {
 	level = new Level(*this);
-	gameTime = & GameTime::getInstance();
+	monitor = new GameStateMonitor(*this);
+	timeManager = & TimeManager::getInstance();
 }
 
 
 Game::~Game(void)
 {
 	delete level;
+	delete monitor;
 }
 
 
@@ -59,18 +63,18 @@ void Game::initData(void)
 
 	running = true;
 
-	level->init(resource);
-	monitor.init(resource);
+	level->init();
+	monitor->init();
 }
 
 
 void Game::execute(void)
 {
-	gameTime->begin(refreshRate);
+	timeManager->begin(refreshRate);
 
 	while (running)
 	{
-		if (gameTime->next())
+		if (timeManager->next())
 		{
 			update();
 			draw();
@@ -82,9 +86,14 @@ void Game::execute(void)
 void Game::update(void)
 {
 	level->update();
-	monitor.update();
-	monitor.showFps(*gameTime);
-	monitor.showPlayerPoint(level->getPlayer());
+
+	monitor->update();
+	monitor->showFps(*timeManager);
+
+	const Player * player = level->getPlayer();
+	if (player != NULL)
+		monitor->showPlayerPoint(*player);
+
 	if (keypressed() && key[KEY_ESC])
 		running = false;
 }
@@ -93,7 +102,7 @@ void Game::update(void)
 void Game::draw(void)
 {
 	drawing.clear();
-	level->draw(drawing);
-	monitor.draw(drawing);
+	level->draw();
+	monitor->draw();
 	drawing.flush();
 }

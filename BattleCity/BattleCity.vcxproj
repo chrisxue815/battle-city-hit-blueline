@@ -78,15 +78,15 @@
   <ItemGroup>
     <ClCompile Include="AnimationDrawing.cpp" />
     <ClCompile Include="DrawingManager.cpp" />
-    <ClCompile Include="ImageDrawing.cpp" />
     <ClCompile Include="LevelDrawing.cpp" />
+    <ClCompile Include="Math.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="ExceptionType.h" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameException.cpp" />
-    <ClCompile Include="GameTime.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -96,18 +96,17 @@
   <ItemGroup>
     <ClInclude Include="AnimationDrawing.h" />
     <ClInclude Include="DrawingManager.h" />
-    <ClInclude Include="IComponent.h" />
-    <ClInclude Include="ImageDrawing.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="LevelDrawing.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameException.h" />
-    <ClInclude Include="GameTime.h" />
+    <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Macro.h" />
-    <ClInclude Include="IEntityDrawing.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="GameStateMonitor.h" />
     <ClInclude Include="TimeSpan.h" />

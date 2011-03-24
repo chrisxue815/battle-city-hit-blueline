@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Entity.h"
-#include "ImageDrawing.h"
+#include "Math.h"
 
 
 namespace BattleCity
@@ -9,23 +9,25 @@ namespace BattleCity
 	class Player : public Entity
 	{
 	protected:
-		int milliseconds;
+		static const int MS_PER_GRID = 100;
+		int xOffset;
+		int yOffset;
 		
-		enum Move {NONE, LEFT_RIGHT, UP_DOWN};
+		enum Move {NONE, LEFT, RIGHT, UP, DOWN};
 		Move lastMove;
 
-		ImageDrawing image;
+		BITMAP * texture;
 
 	public:
-		Player(const Game & game);
-		Player(const Game & game, const Point &);
+		Player(Level & level);
+		Player(Level & level, const Point &);
 		~Player(void);
 
 		// @override
-		void init(const ResourceManager & resource);
+		void init(void);
 		// @override
 		void update(void);
 		// @override
-		void draw(DrawingManager & drawing);
+		void draw(void);
 	};
 }
