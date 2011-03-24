@@ -9,7 +9,9 @@
 namespace BattleCity
 {
 	class Level;
-
+	/**
+		*Entity是一个能在Level中运行的类	
+	*/
 	class Entity
 	{
 	protected:
