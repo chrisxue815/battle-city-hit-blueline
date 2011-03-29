@@ -24,7 +24,6 @@ namespace BattleCity
 		PLAYER1_RIGHT_FRAME,
 		BULLET_FRAME,
 		BRICK_FRAME,
-		EMPTY_FRAME,
 
 		END_FRAME
 	};

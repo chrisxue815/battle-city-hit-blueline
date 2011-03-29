@@ -60,129 +60,129 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="source\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameException.cpp">
+    <ClCompile Include="source\GameException.cpp">
       <Filter>Source Files\Exception</Filter>
     </ClCompile>
-    <ClCompile Include="ExceptionType.h">
+    <ClCompile Include="source\ExceptionType.h">
       <Filter>Header Files\Exception</Filter>
     </ClCompile>
-    <ClCompile Include="Level.cpp">
+    <ClCompile Include="source\Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameStateMonitor.cpp">
+    <ClCompile Include="source\GameStateMonitor.cpp">
       <Filter>Source Files\Helper</Filter>
     </ClCompile>
-    <ClCompile Include="Point.cpp">
+    <ClCompile Include="source\Point.cpp">
       <Filter>Source Files\Helper</Filter>
     </ClCompile>
-    <ClCompile Include="LevelDrawing.cpp">
+    <ClCompile Include="source\LevelDrawing.cpp">
       <Filter>Source Files\Drawing</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationDrawing.cpp">
+    <ClCompile Include="source\AnimationDrawing.cpp">
       <Filter>Source Files\Drawing</Filter>
     </ClCompile>
-    <ClCompile Include="TimeManager.cpp">
+    <ClCompile Include="source\TimeManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
+    <ClCompile Include="source\ResourceManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="DrawingManager.cpp">
+    <ClCompile Include="source\DrawingManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="TimeSpan.cpp">
+    <ClCompile Include="source\TimeSpan.cpp">
       <Filter>Source Files\Helper</Filter>
     </ClCompile>
-    <ClCompile Include="Math.cpp">
+    <ClCompile Include="source\Math.cpp">
       <Filter>Source Files\Helper</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="source\Player.cpp">
       <Filter>Source Files\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
+    <ClCompile Include="source\Bullet.cpp">
       <Filter>Source Files\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
+    <ClCompile Include="source\Entity.cpp">
       <Filter>Source Files\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Rectangle.cpp">
+    <ClCompile Include="source\Rectangle.cpp">
       <Filter>Source Files\Helper</Filter>
     </ClCompile>
-    <ClCompile Include="Tank.cpp">
+    <ClCompile Include="source\Tank.cpp">
       <Filter>Source Files\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameException.h">
+    <ClInclude Include="source\GameException.h">
       <Filter>Header Files\Exception</Filter>
     </ClInclude>
-    <ClInclude Include="Macro.h">
+    <ClInclude Include="source\Macro.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="TimeSpan.h">
+    <ClInclude Include="source\TimeSpan.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="Level.h">
+    <ClInclude Include="source\Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameStateMonitor.h">
+    <ClInclude Include="source\GameStateMonitor.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="source\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Point.h">
+    <ClInclude Include="source\Point.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="LevelDrawing.h">
+    <ClInclude Include="source\LevelDrawing.h">
       <Filter>Header Files\Drawing</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationDrawing.h">
+    <ClInclude Include="source\AnimationDrawing.h">
       <Filter>Header Files\Drawing</Filter>
     </ClInclude>
-    <ClInclude Include="TimeManager.h">
+    <ClInclude Include="source\TimeManager.h">
       <Filter>Header Files\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
+    <ClInclude Include="source\ResourceManager.h">
       <Filter>Header Files\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="DrawingManager.h">
+    <ClInclude Include="source\DrawingManager.h">
       <Filter>Header Files\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
+    <ClInclude Include="source\Component.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="Math.h">
+    <ClInclude Include="source\Math.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="source\Player.h">
       <Filter>Header Files\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="Brick.h">
+    <ClInclude Include="source\Brick.h">
       <Filter>Header Files\Tile</Filter>
     </ClInclude>
-    <ClInclude Include="Tile.h">
+    <ClInclude Include="source\Tile.h">
       <Filter>Header Files\Tile</Filter>
     </ClInclude>
-    <ClInclude Include="EmptySpace.h">
+    <ClInclude Include="source\EmptySpace.h">
       <Filter>Header Files\Tile</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
+    <ClInclude Include="source\Bullet.h">
       <Filter>Header Files\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
+    <ClInclude Include="source\Entity.h">
       <Filter>Header Files\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="Rectangle.h">
+    <ClInclude Include="source\Rectangle.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="Tank.h">
+    <ClInclude Include="source\Tank.h">
       <Filter>Header Files\Entity</Filter>
     </ClInclude>
   </ItemGroup>
