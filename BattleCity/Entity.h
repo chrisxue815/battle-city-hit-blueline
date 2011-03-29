@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+#include "Rectangle.h"
 #include "Point.h"
 #include "ResourceManager.h"
 #include "TimeManager.h"
@@ -16,31 +17,43 @@ namespace BattleCity
 	{
 	protected:
 		Level & level;
-		Point point;
+		Rectangle rect;
 
 	public:
-		virtual const Point & getPoint(void) const;
-		virtual void setPoint(const Point &);
+		const Rectangle & getRect(void) const;
+		void setRect(const Rectangle & rect);
+
+		Point getPoint(void) const;
+		void setPoint(const Point & point);
 
 	protected:
 		Entity(Level & level);
-		Entity(Level & level, const Point &);
+		Entity(Level & level, const Rectangle & rect);
 
 	public:
-		virtual void init(void) = 0;
 		virtual void update(void) = 0;
 		virtual void draw(void) = 0;
+
+	protected:
+		bool cannotGoLeft(void);
+		bool cannotGoRight(void);
+		bool cannotGoUp(void);
+		bool cannotGoDown(void);
 	};
 
-
-	inline const Point & Entity::getPoint(void) const
-	{
-		return point;
+	inline const Rectangle & Entity::getRect(void) const {
+		return rect;
 	}
 
+	inline void Entity::setRect(const Rectangle & rect) {
+		this->rect = rect;
+	}
 
-	inline void Entity::setPoint(const Point & value)
-	{
-		this->point = value;
+	inline Point Entity::getPoint(void) const {
+		return rect.getLeftTop();
+	}
+
+	inline void Entity::setPoint(const Point & point) {
+		rect.setLeftTop(point);
 	}
 }

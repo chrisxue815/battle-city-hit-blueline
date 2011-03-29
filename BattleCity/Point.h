@@ -23,6 +23,8 @@ namespace BattleCity
 
 		Point operator + (const Point &);
 		Point operator - (const Point &);
+		Point operator * (const Point &);
+		Point operator / (const Point &);
 		Point operator * (int);
 		Point operator / (int);
 		Point & operator += (const Point &);
@@ -56,6 +58,14 @@ namespace BattleCity
 
 	inline Point Point::operator - (const Point & value) {
 		return Point(x - value.x, y - value.y);
+	}
+
+	inline Point Point::operator * (const Point & value) {
+		return Point(x * value.x, y * value.y);
+	}
+
+	inline Point Point::operator / (const Point & value) {
+		return Point(x / value.x, y / value.y);
 	}
 
 	inline Point Point::operator * (int value) {

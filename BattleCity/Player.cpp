@@ -4,46 +4,53 @@ using namespace BattleCity;
 
 
 Player::Player(Level & level)
-	: Entity(level)
+	: Tank(level)
 {
+	loadContent();
+
 	xOffset = 0;
 	yOffset = 0;
-	texture = NULL;
+	shootingCooldown = 0;
 }
 
 
 Player::Player(Level & level, const Point & point)
-	: Entity(level, point)
+	: Tank(level, point)
 {
+	loadContent();
+
 	xOffset = 0;
 	yOffset = 0;
-	texture = NULL;
+	shootingCooldown = 0;
 }
 
 
-Player::~Player(void)
+void Player::loadContent(void)
 {
-	if (texture != NULL)
-		destroy_bitmap(texture);
-}
-
-
-// @override
-void Player::init(void)
-{
-	lastMove = NONE;
-
 	const ResourceManager & resource = level.getResourceManager();
-	texture = resource.loadBitmap("texture\\player.bmp");
+
+	upTexture = resource.getBitmap(PLAYER1_UP_FRAME);
+	downTexture = resource.getBitmap(PLAYER1_DOWN_FRAME);
+	leftTexture = resource.getBitmap(PLAYER1_LEFT_FRAME);
+	rightTexture = resource.getBitmap(PLAYER1_RIGHT_FRAME);
+
+	current = upTexture;
 }
 
 
 // @override
 void Player::update(void)
 {
-	const TimeManager * timeManager = level.getTimeManager();
-	int milliseconds = timeManager->getInterval().getMilliseconds();
+	const TimeManager & timeManager = level.getTimeManager();
+	int milliseconds = timeManager.getInterval().getMilliseconds();
 
+	updateMoving(milliseconds);
+	updateShooting(milliseconds);
+}
+
+
+void Player::updateMoving(int milliseconds)
+{
 	// move
 	int xMove = 0;
 	int yMove = 0;
@@ -61,59 +68,106 @@ void Player::update(void)
 		yMove += 1;
 	}
 
+	// 只能向一个运动
 	if (xMove != 0 && yMove != 0)
 	{
-		if (lastMove == UP || lastMove == DOWN)
+		if (key[KEY_LEFT] && !lastKeyDown[LEFT] || key[KEY_RIGHT] && !lastKeyDown[RIGHT])
 			yMove = 0;
-		else
+		else if (key[KEY_UP] && !lastKeyDown[UP] || key[KEY_DOWN] && !lastKeyDown[DOWN])
 			xMove = 0;
+		else
+		{
+			if (current == leftTexture || current == rightTexture)
+				yMove = 0;
+			else
+				xMove = 0;
+		}
 	}
+
+	// 改变朝向
+	if (xMove < 0)
+		current = leftTexture;
+	else if (xMove > 0)
+		current = rightTexture;
+	else if (yMove < 0)
+		current = upTexture;
+	else if (yMove > 0)
+		current = downTexture;
+
+	// 碰撞检测
+	if (xMove == -1 && cannotGoLeft() || xMove == 1 && cannotGoRight())
+		xMove = 0;
+	if (yMove == -1 && cannotGoUp() || yMove == 1 && cannotGoDown())
+		yMove = 0;
 
 	if (xMove > 0)
 	{
-		lastMove = LEFT;
 		xOffset += milliseconds;
 		yOffset = 0;
 		if (xOffset >= MS_PER_GRID / 2)
 		{
 			xOffset -= MS_PER_GRID;
-			point += Point(1, 0);
+			rect += Point(1, 0);
 		}
 	}
 	else if (xMove < 0)
 	{
-		lastMove = RIGHT;
 		xOffset -= milliseconds;
 		yOffset = 0;
 		if (xOffset <= -MS_PER_GRID / 2)
 		{
 			xOffset += MS_PER_GRID;
-			point -= Point(1, 0);
+			rect -= Point(1, 0);
 		}
 	}
 	else if (yMove > 0)
 	{
-		lastMove = UP;
 		yOffset += milliseconds;
+		xOffset = 0;
 		if (yOffset >= MS_PER_GRID / 2)
 		{
 			yOffset -= MS_PER_GRID;
-			point += Point(0, 1);
+			rect += Point(0, 1);
 		}
 	}
 	else if (yMove < 0)
 	{
-		lastMove = DOWN;
 		yOffset -= milliseconds;
+		xOffset = 0;
 		if (yOffset <= -MS_PER_GRID / 2)
 		{
 			yOffset += MS_PER_GRID;
-			point -= Point(0, 1);
+			rect -= Point(0, 1);
 		}
 	}
-	else
+
+	lastKeyDown[LEFT] = key[KEY_LEFT];
+	lastKeyDown[RIGHT] = key[KEY_RIGHT];
+	lastKeyDown[UP] = key[KEY_UP];
+	lastKeyDown[DOWN] = key[KEY_DOWN];
+}
+
+
+void Player::updateShooting(int milliseconds)
+{
+	if (shootingCooldown > 0)
+		shootingCooldown -= milliseconds;
+
+	if (key[KEY_SPACE] && shootingCooldown <= 0)
 	{
-		lastMove = NONE;
+		shootingCooldown = SHOOTING_COOLDOWN;
+		Point direction;
+		if (current == upTexture)
+			direction = Point(0, -1);
+		else if (current == downTexture)
+			direction = Point(0, 1);
+		else if (current == leftTexture)
+			direction = Point(-1, 0);
+		else if (current == rightTexture)
+			direction = Point(1, 0);
+
+		Bullet bullet(level, rect.getLeftTop(), direction);
+		level.addBullet(bullet);
 	}
 }
 
@@ -122,7 +176,7 @@ void Player::update(void)
 void Player::draw(void)
 {
 	const LevelDrawing & levelDrawing = level.getLevelDrawing();
-	Point screenPoint = levelDrawing.getScreenPoint(point);
+	Point screenPoint = levelDrawing.getScreenPoint(rect.getLeftTop());
 	const Point & gridSize = levelDrawing.getGridSize();
 	
 	int x = Math::floorDiv(xOffset * gridSize.getX(), MS_PER_GRID) + screenPoint.getX();
@@ -132,5 +186,5 @@ void Player::draw(void)
 
 	DrawingManager & drawing = level.getDrawingManager();
 
-	draw_sprite(drawing.getBuffer(), texture, screenPoint.getX(), screenPoint.getY());
+	draw_sprite(drawing.getBuffer(), current, screenPoint.getX(), screenPoint.getY());
 }

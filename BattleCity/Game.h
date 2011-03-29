@@ -27,15 +27,15 @@ namespace BattleCity
 		bool running;
 
 		TimeManager * timeManager;
-		ResourceManager resource;
-		DrawingManager drawing;
+		ResourceManager * resource;
+		DrawingManager * drawing;
 
 		Level * level;
 		GameStateMonitor * monitor;
 
 	public:
 		int getRefreshRate(void) const;
-		const TimeManager * getTimeManager(void) const;
+		const TimeManager & getTimeManager(void) const;
 		const ResourceManager & getResourceManager(void) const;
 		DrawingManager & getDrawingManager(void);
 
@@ -43,7 +43,6 @@ namespace BattleCity
 		Game(void);
 		~Game(void);
 
-		void init();
 		void execute(void);
 
 		void update(void);
@@ -51,7 +50,7 @@ namespace BattleCity
 
 	private:
 		void initGraphics(void);
-		void initData(void);
+		void initManager(void);
 	};
 
 
@@ -59,15 +58,15 @@ namespace BattleCity
 		return refreshRate;
 	}
 
-	inline const TimeManager * Game::getTimeManager(void) const {
-		return timeManager;
+	inline const TimeManager & Game::getTimeManager(void) const {
+		return *timeManager;
 	}
 
 	inline const ResourceManager & Game::getResourceManager(void) const {
-		return resource;
+		return *resource;
 	}
 
 	inline DrawingManager & Game::getDrawingManager(void) {
-		return drawing;
+		return *drawing;
 	}
 }

@@ -38,11 +38,20 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\alpng\include;$(ProjectDir)\allegro\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(ProjectDir)\lib;$(LibraryPath)</LibraryPath>
-    <ExecutablePath>E:\battleCity\project\BattleCity\bin;$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>$(ProjectDir)\alpng\lib;$(ProjectDir)\allegro\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>$(ProjectDir)\allegro\bin;$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ExecutablePath>$(ProjectDir)\allegro\bin;$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(ProjectDir)\allegro\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>$(ProjectDir)\allegro\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -51,7 +60,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>alleg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>alleg.lib;alpng.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuild>
       <Command>xcopy /y "%(Identity)" "$(OutDir)\%(RelativeDir)"</Command>
@@ -74,19 +83,23 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>alleg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimationDrawing.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="DrawingManager.cpp" />
     <ClCompile Include="LevelDrawing.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="ExceptionType.h" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameException.cpp" />
+    <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
@@ -96,15 +109,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationDrawing.h" />
+    <ClInclude Include="Brick.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="DrawingManager.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="EmptySpace.h" />
     <ClInclude Include="LevelDrawing.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameException.h" />
+    <ClInclude Include="Tank.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Macro.h" />
@@ -113,16 +132,16 @@
     <ClInclude Include="TimeSpan.h" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="resource\texture\base.bmp" />
-    <CustomBuild Include="resource\texture\brick.bmp" />
-    <CustomBuild Include="resource\texture\bullet.bmp" />
-    <CustomBuild Include="resource\texture\bush.bmp" />
-    <CustomBuild Include="resource\texture\enemy.bmp" />
-    <CustomBuild Include="resource\texture\gamebg.bmp" />
-    <CustomBuild Include="resource\texture\levelbg.bmp" />
-    <CustomBuild Include="resource\texture\player.bmp" />
-    <CustomBuild Include="resource\texture\pool.bmp" />
-    <CustomBuild Include="resource\texture\steel.bmp" />
+    <CustomBuild Include="resource\texture\player\player1-down.bmp" />
+    <CustomBuild Include="resource\texture\player\player1-left.bmp" />
+    <CustomBuild Include="resource\texture\player\player1-right.bmp" />
+    <CustomBuild Include="resource\texture\player\player1-up.bmp" />
+    <CustomBuild Include="resource\texture\scene1\brick.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="resource\texture\player\bullet.png">
+      <FileType>Document</FileType>
+    </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

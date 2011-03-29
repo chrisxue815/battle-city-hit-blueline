@@ -40,6 +40,24 @@
     <Filter Include="Header Files\Manager">
       <UniqueIdentifier>{3faca13d-5900-4380-9f48-1b20d3b5c5e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\texture\player">
+      <UniqueIdentifier>{d68fc47d-7c0e-45d6-bd16-171c0dd8dbf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\texture\scene1">
+      <UniqueIdentifier>{b312fcbd-8d53-40d6-b767-d45077f3cd78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Tile">
+      <UniqueIdentifier>{2d98dda8-6624-44af-bdd4-cda7f04676c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tile">
+      <UniqueIdentifier>{6565817b-65b8-4125-9932-f638092703e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entity">
+      <UniqueIdentifier>{c53bb6c4-e84b-478f-80de-5c0026705a39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entity">
+      <UniqueIdentifier>{29f9515b-4e34-4034-8196-652f15fdb4db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -48,17 +66,11 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameException.cpp">
       <Filter>Source Files\Exception</Filter>
     </ClCompile>
     <ClCompile Include="ExceptionType.h">
       <Filter>Header Files\Exception</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Source Files</Filter>
@@ -90,16 +102,25 @@
     <ClCompile Include="Math.cpp">
       <Filter>Source Files\Helper</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>Source Files\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Tank.cpp">
+      <Filter>Source Files\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameException.h">
       <Filter>Header Files\Exception</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Macro.h">
       <Filter>Header Files\Helper</Filter>
@@ -140,37 +161,49 @@
     <ClInclude Include="Math.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>Header Files\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="EmptySpace.h">
+      <Filter>Header Files\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Header Files\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Tank.h">
+      <Filter>Header Files\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="resource\texture\pool.bmp">
-      <Filter>Resource Files\texture</Filter>
+    <CustomBuild Include="resource\texture\scene1\brick.bmp">
+      <Filter>Resource Files\texture\scene1</Filter>
     </CustomBuild>
-    <CustomBuild Include="resource\texture\player.bmp">
-      <Filter>Resource Files\texture</Filter>
+    <CustomBuild Include="resource\texture\player\player1-right.bmp">
+      <Filter>Resource Files\texture\player</Filter>
     </CustomBuild>
-    <CustomBuild Include="resource\texture\levelbg.bmp">
-      <Filter>Resource Files\texture</Filter>
+    <CustomBuild Include="resource\texture\player\player1-left.bmp">
+      <Filter>Resource Files\texture\player</Filter>
     </CustomBuild>
-    <CustomBuild Include="resource\texture\gamebg.bmp">
-      <Filter>Resource Files\texture</Filter>
+    <CustomBuild Include="resource\texture\player\player1-up.bmp">
+      <Filter>Resource Files\texture\player</Filter>
     </CustomBuild>
-    <CustomBuild Include="resource\texture\enemy.bmp">
-      <Filter>Resource Files\texture</Filter>
+    <CustomBuild Include="resource\texture\player\player1-down.bmp">
+      <Filter>Resource Files\texture\player</Filter>
     </CustomBuild>
-    <CustomBuild Include="resource\texture\bush.bmp">
-      <Filter>Resource Files\texture</Filter>
-    </CustomBuild>
-    <CustomBuild Include="resource\texture\bullet.bmp">
-      <Filter>Resource Files\texture</Filter>
-    </CustomBuild>
-    <CustomBuild Include="resource\texture\brick.bmp">
-      <Filter>Resource Files\texture</Filter>
-    </CustomBuild>
-    <CustomBuild Include="resource\texture\steel.bmp">
-      <Filter>Resource Files\texture</Filter>
-    </CustomBuild>
-    <CustomBuild Include="resource\texture\base.bmp">
-      <Filter>Resource Files\texture</Filter>
+    <CustomBuild Include="resource\texture\player\bullet.png">
+      <Filter>Resource Files\texture\player</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>

@@ -5,3 +5,6 @@ glob:BattleCity/BattleCity.vcxproj.user
 glob:BattleCity.opensdf
 glob:BattleCity.sdf
 glob:BattleCity.suo
+glob:doc/*
+glob:testResource/*
+glob:*.vsp

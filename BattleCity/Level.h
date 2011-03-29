@@ -1,11 +1,15 @@
 #pragma once
 
 #include "Game.h"
-#include "Player.h"
 #include "TimeManager.h"
 #include "LevelDrawing.h"
+#include "Player.h"
+#include "Bullet.h"
+#include "Brick.h"
+#include "EmptySpace.h"
 #include <allegro.h>
 #include <vector>
+#include <list>
 
 
 namespace BattleCity
@@ -13,18 +17,16 @@ namespace BattleCity
 	class Level : public Component
 	{
 	protected:
-		typedef vector<int> vector1;
-		typedef vector<vector1> vector2;
-
-		vector2 board;
+		vector<vector<Tile*>> grids;
 
 		Player * player;
+		list<Bullet> bullets;
 
 		LevelDrawing levelDrawing;
 
 	public:
 		int getRefreshRate(void) const;
-		const TimeManager * getTimeManager(void) const;
+		const TimeManager & getTimeManager(void) const;
 		const ResourceManager & getResourceManager(void) const;
 		DrawingManager & getDrawingManager(void);
 
@@ -32,13 +34,16 @@ namespace BattleCity
 
 	public:
 		const Player * getPlayer(void) const;
+		const Tile * getGrid(int x, int y) const;
+
+		void addBullet(Bullet & bullet);
+		void bulletHit(int x, int y);
+		//void bulletHit(const Entity * entity);
 
 	public:
 		Level(Game & game);
 		~Level(void);
 
-		// @override
-		void init(void);
 		// @override
 		void update(void);
 		// @override
@@ -50,7 +55,7 @@ namespace BattleCity
 		return game.getRefreshRate();
 	}
 
-	inline const TimeManager * Level::getTimeManager(void) const {
+	inline const TimeManager & Level::getTimeManager(void) const {
 		return game.getTimeManager();
 	}
 
@@ -68,5 +73,17 @@ namespace BattleCity
 
 	inline const LevelDrawing & Level::getLevelDrawing(void) const {
 		return levelDrawing;
+	}
+
+	inline const Tile * Level::getGrid(int x, int y) const
+	{
+		if (x >= 0 && x < LEVEL_GRID_WIDTH && y >= 0 && y < LEVEL_GRID_HEIGHT)
+			return grids[x][y];
+		else
+			return NULL;
+	}
+
+	inline void Level::addBullet(Bullet & bullet) {
+		bullets.push_back(bullet);
 	}
 }

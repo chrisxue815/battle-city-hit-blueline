@@ -2,11 +2,6 @@
 using namespace BattleCity;
 
 
-void GameStateMonitor::init(void)
-{
-}
-
-
 void GameStateMonitor::update(void)
 {
 	notification[0] = '\0';

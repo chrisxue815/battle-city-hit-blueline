@@ -12,10 +12,10 @@ namespace BattleCity
 
 	public:
 		DrawingManager(void);
+	protected:
 		~DrawingManager(void);
 
 	public:
-		void init(void);
 		void clear(void);
 		void flush(void);
 

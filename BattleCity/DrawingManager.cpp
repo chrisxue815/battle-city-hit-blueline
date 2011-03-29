@@ -4,7 +4,7 @@ using namespace BattleCity;
 
 DrawingManager::DrawingManager(void)
 {
-	buffer = NULL;
+	buffer = create_bitmap(SCREEN_W, SCREEN_H);
 }
 
 
@@ -12,12 +12,6 @@ DrawingManager::~DrawingManager(void)
 {
 	if (buffer != NULL)
 		destroy_bitmap(buffer);
-}
-
-
-void DrawingManager::init(void)
-{
-	buffer = create_bitmap(SCREEN_W, SCREEN_H);
 }
 
 

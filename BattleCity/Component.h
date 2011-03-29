@@ -19,7 +19,6 @@ namespace BattleCity
 		Component(Game & game);
 
 	public:
-		virtual void init(void) = 0;
 		virtual void update(void) = 0;
 		virtual void draw(void) = 0;
 	};

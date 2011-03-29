@@ -20,8 +20,6 @@ namespace BattleCity
 		GameStateMonitor(Game & game);
 
 		// @override
-		void init(void);
-		// @override
 		void update(void);
 		// @override
 		void draw(void);
