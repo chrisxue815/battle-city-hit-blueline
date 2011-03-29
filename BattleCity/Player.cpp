@@ -95,9 +95,9 @@ void Player::updateMoving(int milliseconds)
 		current = downTexture;
 
 	// Åö×²¼ì²â
-	if (xMove == -1 && cannotGoLeft() || xMove == 1 && cannotGoRight())
+	if (xMove == -1 && cannotGoLeft() && xOffset <= 0 || xMove == 1 && cannotGoRight() && xOffset >= 0)
 		xMove = 0;
-	if (yMove == -1 && cannotGoUp() || yMove == 1 && cannotGoDown())
+	if (yMove == -1 && cannotGoUp() && yOffset <= 0 || yMove == 1 && cannotGoDown() && yOffset >= 0)
 		yMove = 0;
 
 	if (xMove > 0)
@@ -156,17 +156,26 @@ void Player::updateShooting(int milliseconds)
 	if (key[KEY_SPACE] && shootingCooldown <= 0)
 	{
 		shootingCooldown = SHOOTING_COOLDOWN;
-		Point direction;
-		if (current == upTexture)
-			direction = Point(0, -1);
-		else if (current == downTexture)
-			direction = Point(0, 1);
-		else if (current == leftTexture)
-			direction = Point(-1, 0);
-		else if (current == rightTexture)
-			direction = Point(1, 0);
 
-		Bullet bullet(level, rect.getLeftTop(), direction);
+		Point position = rect.getLeftTop();
+		Point direction;
+
+		if (current == upTexture) {
+			direction = Point(0, -1);
+		}
+		else if (current == downTexture) {
+			position += Point(0, 1);
+			direction = Point(0, 1);
+		}
+		else if (current == leftTexture) {
+			direction = Point(-1, 0);
+		}
+		else if (current == rightTexture) {
+			position += Point(1, 0);
+			direction = Point(1, 0);
+		}
+
+		Bullet bullet(level, position, direction);
 		level.addBullet(bullet);
 	}
 }
