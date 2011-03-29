@@ -100,6 +100,22 @@ void Player::updateMoving(int milliseconds)
 	if (yMove == -1 && cannotGoUp() && yOffset <= 0 || yMove == 1 && cannotGoDown() && yOffset >= 0)
 		yMove = 0;
 
+	// 踩到冰会加速
+	int xRange = rect.getLeft() + rect.getWidth();
+	int yRange = rect.getTop() + rect.getHeight();
+	for (int x = rect.getLeft(); x < xRange; x++)
+	{
+		for (int y = rect.getTop(); y < yRange; y++)
+		{
+			const Tile * tile = level.getGrid(x, y);
+			if (tile->speedUpPlayer())
+			{
+				milliseconds *= ICE_COEFFICIENT;
+				break;
+			}
+		}
+	}
+	
 	if (xMove > 0)
 	{
 		xOffset += milliseconds;
@@ -161,17 +177,19 @@ void Player::updateShooting(int milliseconds)
 		Point direction;
 
 		if (current == upTexture) {
+			position += Point(0, -1);
 			direction = Point(0, -1);
 		}
 		else if (current == downTexture) {
-			position += Point(0, 1);
+			position += Point(0, rect.getHeight());
 			direction = Point(0, 1);
 		}
 		else if (current == leftTexture) {
+			position += Point(-1, 0);
 			direction = Point(-1, 0);
 		}
 		else if (current == rightTexture) {
-			position += Point(1, 0);
+			position += Point(rect.getWidth(), 0);
 			direction = Point(1, 0);
 		}
 

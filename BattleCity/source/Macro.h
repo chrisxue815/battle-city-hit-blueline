@@ -14,17 +14,8 @@ namespace BattleCity
 	#define LEVEL_GRID_WIDTH 38
 	#define LEVEL_GRID_HEIGHT 30
 
+	#define LEVEL_X 0
+	#define LEVEL_Y 0
+
 	enum Direction {LEFT, RIGHT, UP, DOWN, NO_DIRECTION};
-
-	enum BitmapFrame
-	{
-		PLAYER1_UP_FRAME,
-		PLAYER1_DOWN_FRAME,
-		PLAYER1_LEFT_FRAME,
-		PLAYER1_RIGHT_FRAME,
-		BULLET_FRAME,
-		BRICK_FRAME,
-
-		END_FRAME
-	};
 }

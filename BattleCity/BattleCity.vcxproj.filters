@@ -185,6 +185,18 @@
     <ClInclude Include="source\Tank.h">
       <Filter>Header Files\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="source\Steel.h">
+      <Filter>Header Files\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Pool.h">
+      <Filter>Header Files\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Ice.h">
+      <Filter>Header Files\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Bush.h">
+      <Filter>Header Files\Tile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="resource\texture\scene1\brick.bmp">
@@ -204,6 +216,21 @@
     </CustomBuild>
     <CustomBuild Include="resource\texture\player\bullet.png">
       <Filter>Resource Files\texture\player</Filter>
+    </CustomBuild>
+    <CustomBuild Include="resource\texture\scene1\steel.bmp">
+      <Filter>Resource Files\texture\scene1</Filter>
+    </CustomBuild>
+    <CustomBuild Include="resource\texture\scene1\pool.bmp">
+      <Filter>Resource Files\texture\scene1</Filter>
+    </CustomBuild>
+    <CustomBuild Include="resource\texture\scene1\ice.bmp">
+      <Filter>Resource Files\texture\scene1</Filter>
+    </CustomBuild>
+    <CustomBuild Include="resource\texture\scene1\bush.bmp">
+      <Filter>Resource Files\texture\scene1</Filter>
+    </CustomBuild>
+    <CustomBuild Include="resource\texture\scene1\background.bmp">
+      <Filter>Resource Files\texture\scene1</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>

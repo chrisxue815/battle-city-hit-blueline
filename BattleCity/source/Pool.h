@@ -7,13 +7,13 @@
 
 namespace BattleCity
 {
-	class Brick : public Tile
+	class Pool : public Tile
 	{
 	protected:
 		BITMAP * texture;
 
 	public:
-		Brick(const ResourceManager & resource);
+		Pool(const ResourceManager & resource);
 
 	public:
 		// @override
@@ -26,24 +26,24 @@ namespace BattleCity
 		bool speedUpPlayer(void) const;
 	};
 
-	inline Brick::Brick(const ResourceManager & resource)
+	inline Pool::Pool(const ResourceManager & resource)
 	{
-		texture = resource.getBitmap(BRICK_FRAME);
+		texture = resource.getBitmap(POOL_FRAME);
 	}
 
-	inline BITMAP * Brick::getTexture(void) {
+	inline BITMAP * Pool::getTexture(void) {
 		return texture;
 	}
 
-	inline bool Brick::canPlayerGoThrough(void) const {
+	inline bool Pool::canPlayerGoThrough(void) const {
 		return false;
 	}
 
-	inline BulletEvent Brick::getBulletEvent( void ) const {
-		return BULLET_CAN_HIT;
+	inline BulletEvent Pool::getBulletEvent( void ) const {
+		return BULLET_CAN_GO_THROUGH;
 	}
 
-	inline bool Brick::speedUpPlayer( void ) const {
+	inline bool Pool::speedUpPlayer( void ) const {
 		return false;
 	}
 }

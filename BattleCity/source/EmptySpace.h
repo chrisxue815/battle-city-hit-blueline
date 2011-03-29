@@ -16,10 +16,11 @@ namespace BattleCity
 		// @override
 		BITMAP * getTexture(void);
 		// @override
-		bool getSolid(void) const;
-
-	public:
-		void onBulletHit(void);
+		bool canPlayerGoThrough(void) const;
+		// @override
+		BulletEvent getBulletEvent(void) const;
+		// @override
+		bool speedUpPlayer(void) const;
 	};
 
 	inline EmptySpace::EmptySpace(void) {
@@ -29,7 +30,15 @@ namespace BattleCity
 		return NULL;
 	}
 
-	inline bool EmptySpace::getSolid(void) const {
+	inline bool EmptySpace::canPlayerGoThrough(void) const {
+		return true;
+	}
+
+	inline BulletEvent EmptySpace::getBulletEvent( void ) const {
+		return BULLET_CAN_GO_THROUGH;
+	}
+
+	inline bool EmptySpace::speedUpPlayer( void ) const {
 		return false;
 	}
 }

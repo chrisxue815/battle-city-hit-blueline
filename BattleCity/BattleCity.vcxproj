@@ -111,17 +111,21 @@
     <ClInclude Include="source\AnimationDrawing.h" />
     <ClInclude Include="source\Brick.h" />
     <ClInclude Include="source\Bullet.h" />
+    <ClInclude Include="source\Bush.h" />
     <ClInclude Include="source\DrawingManager.h" />
     <ClInclude Include="source\Component.h" />
     <ClInclude Include="source\EmptySpace.h" />
+    <ClInclude Include="source\Ice.h" />
     <ClInclude Include="source\LevelDrawing.h" />
     <ClInclude Include="source\Math.h" />
+    <ClInclude Include="source\Pool.h" />
     <ClInclude Include="source\Rectangle.h" />
     <ClInclude Include="source\ResourceManager.h" />
     <ClInclude Include="source\Point.h" />
     <ClInclude Include="source\Entity.h" />
     <ClInclude Include="source\Game.h" />
     <ClInclude Include="source\GameException.h" />
+    <ClInclude Include="source\Steel.h" />
     <ClInclude Include="source\Tank.h" />
     <ClInclude Include="source\Tile.h" />
     <ClInclude Include="source\TimeManager.h" />
@@ -142,6 +146,21 @@
     <CustomBuild Include="resource\texture\player\bullet.png">
       <FileType>Document</FileType>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="resource\texture\scene1\steel.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="resource\texture\scene1\pool.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="resource\texture\scene1\ice.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="resource\texture\scene1\bush.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="resource\texture\scene1\background.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

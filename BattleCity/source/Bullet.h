@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.h"
+#include "Tank.h"
 #include "Point.h"
 #include "Macro.h"
 #include <allegro.h>

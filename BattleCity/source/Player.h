@@ -11,12 +11,13 @@ namespace BattleCity
 	protected:
 		static const int MS_PER_GRID = 150;
 		static const int SHOOTING_COOLDOWN = 150;
+		static const int ICE_COEFFICIENT = 2;
 
 		int xOffset;
 		int yOffset;
 		int shootingCooldown;
 		
-		char lastKeyDown[NO_DIRECTION];
+		char lastKeyDown[NO_DIRECTION];  //TODO: fix this hard code
 
 		BITMAP * current;
 

@@ -78,7 +78,10 @@ void Bullet::collisionDetection(void)
 			const Tile * tile = level.getGrid(x, y);
 			if (tile == NULL)
 				alive = false;
-			else if (tile->getSolid()) {
+			else if (tile->getBulletEvent() == BULLET_CANNOT_HIT) {
+				alive = false;
+			}
+			else if (tile->getBulletEvent() == BULLET_CAN_HIT) {
 				alive = false;
 				level.bulletHit(x, y);
 			}

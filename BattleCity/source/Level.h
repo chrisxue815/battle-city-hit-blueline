@@ -5,8 +5,7 @@
 #include "LevelDrawing.h"
 #include "Player.h"
 #include "Bullet.h"
-#include "Brick.h"
-#include "EmptySpace.h"
+#include "Tile.h"
 #include <allegro.h>
 #include <vector>
 #include <list>
@@ -18,11 +17,13 @@ namespace BattleCity
 	{
 	protected:
 		vector<vector<Tile*>> grids;
+		list<Point> bushTiles;
 
 		Player * player;
 		list<Bullet> bullets;
 
 		LevelDrawing levelDrawing;
+		BITMAP * background;
 
 	public:
 		int getRefreshRate(void) const;
@@ -35,6 +36,7 @@ namespace BattleCity
 	public:
 		const Player * getPlayer(void) const;
 		const Tile * getGrid(int x, int y) const;
+		const Tile * getGrid(const Point & point) const;
 
 		void addBullet(Bullet & bullet);
 		void bulletHit(int x, int y);
@@ -77,10 +79,18 @@ namespace BattleCity
 
 	inline const Tile * Level::getGrid(int x, int y) const
 	{
-		if (x >= 0 && x < LEVEL_GRID_WIDTH && y >= 0 && y < LEVEL_GRID_HEIGHT)
+		if (x >= 0 && x < LEVEL_GRID_WIDTH &&
+			y >= 0 && y < LEVEL_GRID_HEIGHT)
 			return grids[x][y];
 		else
 			return NULL;
+	}
+
+	inline const Tile * Level::getGrid(const Point & point) const
+	{
+		int x = point.getX();
+		int y = point.getY();
+		return getGrid(x, y);
 	}
 
 	inline void Level::addBullet(Bullet & bullet) {

@@ -24,7 +24,7 @@ bool Entity::cannotGoLeft()
 	for (; y < yRange; y++)
 	{
 		const Tile * grid = level.getGrid(x, y);
-		if (grid == NULL || grid->getSolid())
+		if (grid == NULL || ! grid->canPlayerGoThrough())
 			return true;
 	}
 
@@ -41,7 +41,7 @@ bool Entity::cannotGoRight()
 	for (; y < yRange; y++)
 	{
 		const Tile * grid = level.getGrid(x, y);
-		if (grid == NULL || grid->getSolid())
+		if (grid == NULL || ! grid->canPlayerGoThrough())
 			return true;
 	}
 
@@ -58,7 +58,7 @@ bool Entity::cannotGoUp()
 	for (; x < xRange; x++)
 	{
 		const Tile * grid = level.getGrid(x, y);
-		if (grid == NULL || grid->getSolid())
+		if (grid == NULL || ! grid->canPlayerGoThrough())
 			return true;
 	}
 
@@ -75,7 +75,7 @@ bool Entity::cannotGoDown()
 	for (; x < xRange; x++)
 	{
 		const Tile * grid = level.getGrid(x, y);
-		if (grid == NULL || grid->getSolid())
+		if (grid == NULL || ! grid->canPlayerGoThrough())
 			return true;
 	}
 

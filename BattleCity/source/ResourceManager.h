@@ -8,6 +8,23 @@
 
 namespace BattleCity
 {
+	enum BitmapFrame
+	{
+		PLAYER1_UP_FRAME,
+		PLAYER1_DOWN_FRAME,
+		PLAYER1_LEFT_FRAME,
+		PLAYER1_RIGHT_FRAME,
+		BULLET_FRAME,
+		BRICK_FRAME,
+		STEEL_FRAME,
+		POOL_FRAME,
+		ICE_FRAME,
+		BUSH_FRAME,
+		BACKGROUND_FRAME,
+
+		END_FRAME
+	};
+
 	class ResourceManager
 	{
 	protected:

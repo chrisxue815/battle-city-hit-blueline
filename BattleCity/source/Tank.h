@@ -15,7 +15,7 @@ namespace BattleCity
 
 		bool alive;
 
-	public:
+	protected:
 		Tank(Level & level);
 		Tank(Level & level, const Point & point);
 

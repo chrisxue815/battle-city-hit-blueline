@@ -5,6 +5,12 @@
 
 namespace BattleCity
 {
+	enum BulletEvent {
+		BULLET_CAN_GO_THROUGH,
+		BULLET_CAN_HIT,
+		BULLET_CANNOT_HIT
+	};
+
 	// interface
 	class Tile
 	{
@@ -13,7 +19,9 @@ namespace BattleCity
 
 	public:
 		virtual BITMAP * getTexture(void) = 0;
-		virtual bool getSolid(void) const = 0;
+		virtual bool canPlayerGoThrough(void) const = 0;
+		virtual BulletEvent getBulletEvent(void) const = 0;
+		virtual bool speedUpPlayer(void) const = 0;
 	};
 
 
