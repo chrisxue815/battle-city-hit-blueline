@@ -4,6 +4,7 @@
 #include "TimeManager.h"
 #include "LevelDrawing.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "Bullet.h"
 #include "Tile.h"
 #include <allegro.h>
@@ -16,11 +17,12 @@ namespace BattleCity
 	class Level : public Component
 	{
 	protected:
-		vector<vector<Tile*>> grids;
-		list<Point> bushTiles;
-
 		Player * player;
+		list<Enemy*> enemies;
 		list<Bullet> bullets;
+
+		vector<vector<Tile*>> tiles;
+		list<Point> bushTiles;
 
 		LevelDrawing levelDrawing;
 		BITMAP * background;
@@ -30,13 +32,14 @@ namespace BattleCity
 		const TimeManager & getTimeManager(void) const;
 		const ResourceManager & getResourceManager(void) const;
 		DrawingManager & getDrawingManager(void);
+		int getMilliseconds(void) const;
 
 		const LevelDrawing & getLevelDrawing(void) const;
 
 	public:
 		const Player * getPlayer(void) const;
-		const Tile * getGrid(int x, int y) const;
-		const Tile * getGrid(const Point & point) const;
+		const Tile * getTile(int x, int y) const;
+		const Tile * getTile(const Point & point) const;
 
 		void addBullet(Bullet & bullet);
 		void bulletHit(int x, int y);
@@ -50,6 +53,10 @@ namespace BattleCity
 		void update(void);
 		// @override
 		void draw(void);
+
+	protected:
+		void initTanks(void);
+		void initTiles(void);
 	};
 
 
@@ -69,6 +76,10 @@ namespace BattleCity
 		return game.getDrawingManager();
 	}
 
+	inline int Level::getMilliseconds(void) const {
+		return game.getMilliseconds();
+	}
+
 	inline const Player * Level::getPlayer(void) const {
 		return player;
 	}
@@ -77,20 +88,20 @@ namespace BattleCity
 		return levelDrawing;
 	}
 
-	inline const Tile * Level::getGrid(int x, int y) const
+	inline const Tile * Level::getTile(int x, int y) const
 	{
 		if (x >= 0 && x < LEVEL_GRID_WIDTH &&
 			y >= 0 && y < LEVEL_GRID_HEIGHT)
-			return grids[x][y];
+			return tiles[x][y];
 		else
 			return NULL;
 	}
 
-	inline const Tile * Level::getGrid(const Point & point) const
+	inline const Tile * Level::getTile(const Point & point) const
 	{
 		int x = point.getX();
 		int y = point.getY();
-		return getGrid(x, y);
+		return getTile(x, y);
 	}
 
 	inline void Level::addBullet(Bullet & bullet) {

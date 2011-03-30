@@ -8,20 +8,20 @@
 
 namespace BattleCity
 {
-	class Player : public Tank
+	class Enemy : public Tank
 	{
 	protected:
-		static const int SHOOTING_COOLDOWN = 300;
+		static const int MOVING_COOLDOWN = 1000;
+		static const int SHOOTING_COOLDOWN = 1000;
 
-		char lastKeyLeft;
-		char lastKeyRight;
-		char lastKeyUp;
-		char lastKeyDown;
+		int movingCooldown;
+		int shootingCooldown;
 
 	public:
-		Player(Level & level);
-		Player(Level & level, const Point &);
+		Enemy(Level & level);
+		Enemy(Level & level, const Point &);
 
+	public:
 		// @override
 		void update(void);
 

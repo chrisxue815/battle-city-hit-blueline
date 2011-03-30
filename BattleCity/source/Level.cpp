@@ -1,4 +1,6 @@
 #include "Level.h"
+#include "Player.h"
+#include "Enemy.h"
 #include "Brick.h"
 #include "Steel.h"
 #include "Pool.h"
@@ -12,11 +14,42 @@ Level::Level(Game & game)
 	: Component(game)
 	, levelDrawing(Point(GRID_WIDTH, GRID_HEIGHT), Point(LEVEL_X, LEVEL_Y), 1.0f)
 {
-	player = new Player(*this);
+	initTanks();
+	initTiles();
 
 	const ResourceManager & resource = game.getResourceManager();
+	background = resource.getBitmap(BACKGROUND_FRAME);
+}
 
-	grids.reserve(LEVEL_GRID_WIDTH);
+
+Level::~Level(void)
+{
+	delete player;
+
+	for (list<Enemy*>::iterator it = enemies.begin(); it != enemies.end(); ++it) {
+			delete (*it);
+	}
+
+	for (int i = 0; i < tiles.size(); i++) {
+		for (int j = 0; j < tiles[i].size(); j++) {
+			delete tiles[i][j];
+		}
+	}
+}
+
+
+void Level::initTanks(void)
+{
+	player = new Player(*this, Point(10, 20));
+	enemies.push_back(new Enemy(*this, Point(0, 0)));
+}
+
+
+void Level::initTiles(void)
+{
+	const ResourceManager & resource = game.getResourceManager();
+
+	tiles.reserve(LEVEL_GRID_WIDTH);
 
 	for (int i = 0; i < LEVEL_GRID_WIDTH; i++)
 	{
@@ -26,48 +59,33 @@ Level::Level(Game & game)
 		{
 			vt.push_back(new EmptySpace());
 		}
-		grids.push_back(vt);
+		tiles.push_back(vt);
 	}
 
 	for (int i = 0; i < 10; i++)
 	{
-		delete grids[i][10];
-		delete grids[i][11];
-		grids[i][10] = new Brick(resource);
-		grids[i][11] = new Brick(resource);
-		delete grids[i + 10][10];
-		delete grids[i + 10][11];
-		grids[i + 10][10] = new Steel(resource);
-		grids[i + 10][11] = new Steel(resource);
-		delete grids[i + 20][10];
-		delete grids[i + 20][11];
-		grids[i + 20][10] = new Pool(resource);
-		grids[i + 20][11] = new Pool(resource);
-		delete grids[i][12];
-		delete grids[i][13];
-		grids[i][12] = new Ice(resource);
-		grids[i][13] = new Ice(resource);
-		delete grids[i + 10][12];
-		delete grids[i + 10][13];
-		grids[i + 10][12] = new Bush(resource);
-		grids[i + 10][13] = new Bush(resource);
+		delete tiles[i][10];
+		delete tiles[i][11];
+		tiles[i][10] = new Brick(resource);
+		tiles[i][11] = new Brick(resource);
+		delete tiles[i + 10][10];
+		delete tiles[i + 10][11];
+		tiles[i + 10][10] = new Steel(resource);
+		tiles[i + 10][11] = new Steel(resource);
+		delete tiles[i + 20][10];
+		delete tiles[i + 20][11];
+		tiles[i + 20][10] = new Pool(resource);
+		tiles[i + 20][11] = new Pool(resource);
+		delete tiles[i][12];
+		delete tiles[i][13];
+		tiles[i][12] = new Ice(resource);
+		tiles[i][13] = new Ice(resource);
+		delete tiles[i + 10][12];
+		delete tiles[i + 10][13];
+		tiles[i + 10][12] = new Bush(resource);
+		tiles[i + 10][13] = new Bush(resource);
 		bushTiles.push_back(Point(i + 10, 12));
 		bushTiles.push_back(Point(i + 10, 13));
-	}
-
-	background = resource.getBitmap(BACKGROUND_FRAME);
-}
-
-
-Level::~Level(void)
-{
-	delete player;
-	for (int i = 0; i < LEVEL_GRID_WIDTH; i++)
-	{
-		for (int j = 0; j < LEVEL_GRID_HEIGHT; j++)
-		{
-			delete grids[i][j];
-		}
 	}
 }
 
@@ -75,6 +93,17 @@ Level::~Level(void)
 void Level::update(void)
 {
 	player->update();
+
+	// update enemies
+	for (list<Enemy*>::iterator it = enemies.begin(); it != enemies.end();)
+	{
+		(*it)->update();
+
+		if (! (*it)->getAlive())
+			it = enemies.erase(it);
+		else
+			++it;
+	}
 
 	// update bullets
 	for (list<Bullet>::iterator it = bullets.begin(); it != bullets.end();)
@@ -99,7 +128,7 @@ void Level::draw(void)
 	{
 		for (int j = 0; j < LEVEL_GRID_HEIGHT; j++)
 		{
-			Tile * tile = grids[i][j];
+			Tile * tile = tiles[i][j];
 			if (tile->getTexture() != NULL)
 			{
 				DrawingManager & drawing = game.getDrawingManager();
@@ -107,6 +136,10 @@ void Level::draw(void)
 				draw_sprite(drawing.getBuffer(), tile->getTexture(), screenPoint.getX(), screenPoint.getY());
 			}
 		}
+	}
+
+	for (list<Enemy*>::iterator it = enemies.begin(); it != enemies.end(); ++it) {
+		(*it)->draw();
 	}
 
 	player->draw();
@@ -117,7 +150,7 @@ void Level::draw(void)
 
 	// 把Bush显示在最上面
 	for (list<Point>::iterator it = bushTiles.begin(); it != bushTiles.end(); ++it) {
-		Tile * tile = grids[it->getX()][it->getY()];
+		Tile * tile = tiles[it->getX()][it->getY()];
 		DrawingManager & drawing = game.getDrawingManager();
 		Point screenPoint = levelDrawing.getScreenPoint(*it);
 		draw_sprite(drawing.getBuffer(), tile->getTexture(), screenPoint.getX(), screenPoint.getY());
@@ -127,6 +160,6 @@ void Level::draw(void)
 
 void Level::bulletHit(int x, int y)
 {
-	delete grids[x][y];
-	grids[x][y] = new EmptySpace();
+	delete tiles[x][y];
+	tiles[x][y] = new EmptySpace();
 }

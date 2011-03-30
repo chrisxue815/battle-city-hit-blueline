@@ -57,6 +57,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>Z:\Chris XP\temp\vscode\BattleCity\BattleCity\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -90,8 +91,9 @@
     <ClCompile Include="source\AnimationDrawing.cpp" />
     <ClCompile Include="source\Bullet.cpp" />
     <ClCompile Include="source\DrawingManager.cpp" />
+    <ClCompile Include="source\Enemy.cpp" />
     <ClCompile Include="source\LevelDrawing.cpp" />
-    <ClCompile Include="source\Math.cpp" />
+    <ClCompile Include="source\BattleCityMath.cpp" />
     <ClCompile Include="source\Rectangle.cpp" />
     <ClCompile Include="source\ResourceManager.cpp" />
     <ClCompile Include="source\Point.cpp" />
@@ -109,15 +111,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\AnimationDrawing.h" />
+    <ClInclude Include="source\BattleCityMath.h" />
     <ClInclude Include="source\Brick.h" />
     <ClInclude Include="source\Bullet.h" />
     <ClInclude Include="source\Bush.h" />
     <ClInclude Include="source\DrawingManager.h" />
     <ClInclude Include="source\Component.h" />
     <ClInclude Include="source\EmptySpace.h" />
+    <ClInclude Include="source\Enemy.h" />
     <ClInclude Include="source\Ice.h" />
     <ClInclude Include="source\LevelDrawing.h" />
-    <ClInclude Include="source\Math.h" />
     <ClInclude Include="source\Pool.h" />
     <ClInclude Include="source\Rectangle.h" />
     <ClInclude Include="source\ResourceManager.h" />

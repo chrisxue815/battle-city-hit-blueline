@@ -38,6 +38,7 @@ namespace BattleCity
 		const TimeManager & getTimeManager(void) const;
 		const ResourceManager & getResourceManager(void) const;
 		DrawingManager & getDrawingManager(void);
+		int getMilliseconds(void) const;
 
 	public:
 		Game(void);
@@ -68,5 +69,9 @@ namespace BattleCity
 
 	inline DrawingManager & Game::getDrawingManager(void) {
 		return *drawing;
+	}
+
+	inline int Game::getMilliseconds(void) const {
+		return timeManager->getInterval().getMilliseconds();
 	}
 }

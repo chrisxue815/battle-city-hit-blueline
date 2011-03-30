@@ -6,22 +6,25 @@ using namespace BattleCity;
 Player::Player(Level & level)
 	: Tank(level)
 {
-	loadContent();
-
-	xOffset = 0;
-	yOffset = 0;
-	shootingCooldown = 0;
+	init();
 }
 
 
 Player::Player(Level & level, const Point & point)
 	: Tank(level, point)
 {
-	loadContent();
+	init();
+}
 
-	xOffset = 0;
-	yOffset = 0;
-	shootingCooldown = 0;
+
+void Player::init( void )
+{
+	lastKeyLeft = 0;
+	lastKeyRight = 0;
+	lastKeyUp = 0;
+	lastKeyDown = 0;
+
+	loadContent();
 }
 
 
@@ -41,8 +44,7 @@ void Player::loadContent(void)
 // @override
 void Player::update(void)
 {
-	const TimeManager & timeManager = level.getTimeManager();
-	int milliseconds = timeManager.getInterval().getMilliseconds();
+	int milliseconds = level.getMilliseconds();	
 
 	updateMoving(milliseconds);
 	updateShooting(milliseconds);
@@ -51,7 +53,6 @@ void Player::update(void)
 
 void Player::updateMoving(int milliseconds)
 {
-	// move
 	int xMove = 0;
 	int yMove = 0;
 
@@ -71,147 +72,45 @@ void Player::updateMoving(int milliseconds)
 	// 只能向一个运动
 	if (xMove != 0 && yMove != 0)
 	{
-		if (key[KEY_LEFT] && !lastKeyDown[LEFT] || key[KEY_RIGHT] && !lastKeyDown[RIGHT])
+		if (key[KEY_LEFT] && !lastKeyLeft || key[KEY_RIGHT] && !lastKeyRight)
 			yMove = 0;
-		else if (key[KEY_UP] && !lastKeyDown[UP] || key[KEY_DOWN] && !lastKeyDown[DOWN])
+		else if(key[KEY_UP] && !lastKeyUp || key[KEY_DOWN] && !lastKeyDown)
 			xMove = 0;
+		else if (current == leftTexture || current == rightTexture)
+			yMove = 0;
 		else
-		{
-			if (current == leftTexture || current == rightTexture)
-				yMove = 0;
-			else
-				xMove = 0;
-		}
+			xMove = 0;
 	}
 
-	// 改变朝向
-	if (xMove < 0)
-		current = leftTexture;
-	else if (xMove > 0)
-		current = rightTexture;
-	else if (yMove < 0)
-		current = upTexture;
-	else if (yMove > 0)
-		current = downTexture;
+	if (xMove == -1)
+		direction = LEFT;
+	else if (xMove == 1)
+		direction = RIGHT;
+	else if (yMove == -1)
+		direction = UP;
+	else if (yMove == 1)
+		direction = DOWN;
+	else
+		direction = NO_DIRECTION;
 
-	// 碰撞检测
-	if (xMove == -1 && cannotGoLeft() && xOffset <= 0 || xMove == 1 && cannotGoRight() && xOffset >= 0)
-		xMove = 0;
-	if (yMove == -1 && cannotGoUp() && yOffset <= 0 || yMove == 1 && cannotGoDown() && yOffset >= 0)
-		yMove = 0;
+	move(milliseconds);
 
-	// 踩到冰会加速
-	int xRange = rect.getLeft() + rect.getWidth();
-	int yRange = rect.getTop() + rect.getHeight();
-	for (int x = rect.getLeft(); x < xRange; x++)
-	{
-		for (int y = rect.getTop(); y < yRange; y++)
-		{
-			const Tile * tile = level.getGrid(x, y);
-			if (tile->speedUpPlayer())
-			{
-				milliseconds *= ICE_COEFFICIENT;
-				break;
-			}
-		}
-	}
-	
-	if (xMove > 0)
-	{
-		xOffset += milliseconds;
-		yOffset = 0;
-		if (xOffset >= MS_PER_GRID / 2)
-		{
-			xOffset -= MS_PER_GRID;
-			rect += Point(1, 0);
-		}
-	}
-	else if (xMove < 0)
-	{
-		xOffset -= milliseconds;
-		yOffset = 0;
-		if (xOffset <= -MS_PER_GRID / 2)
-		{
-			xOffset += MS_PER_GRID;
-			rect -= Point(1, 0);
-		}
-	}
-	else if (yMove > 0)
-	{
-		yOffset += milliseconds;
-		xOffset = 0;
-		if (yOffset >= MS_PER_GRID / 2)
-		{
-			yOffset -= MS_PER_GRID;
-			rect += Point(0, 1);
-		}
-	}
-	else if (yMove < 0)
-	{
-		yOffset -= milliseconds;
-		xOffset = 0;
-		if (yOffset <= -MS_PER_GRID / 2)
-		{
-			yOffset += MS_PER_GRID;
-			rect -= Point(0, 1);
-		}
-	}
-
-	lastKeyDown[LEFT] = key[KEY_LEFT];
-	lastKeyDown[RIGHT] = key[KEY_RIGHT];
-	lastKeyDown[UP] = key[KEY_UP];
-	lastKeyDown[DOWN] = key[KEY_DOWN];
+	lastKeyLeft = key[KEY_LEFT];
+	lastKeyRight = key[KEY_RIGHT];
+	lastKeyUp = key[KEY_UP];
+	lastKeyDown = key[KEY_DOWN];
 }
 
 
 void Player::updateShooting(int milliseconds)
 {
 	if (shootingCooldown > 0)
+	{
 		shootingCooldown -= milliseconds;
-
-	if (key[KEY_SPACE] && shootingCooldown <= 0)
+	}
+	else if (key[KEY_SPACE])
 	{
 		shootingCooldown = SHOOTING_COOLDOWN;
-
-		Point position = rect.getLeftTop();
-		Point direction;
-
-		if (current == upTexture) {
-			position += Point(0, -1);
-			direction = Point(0, -1);
-		}
-		else if (current == downTexture) {
-			position += Point(0, rect.getHeight());
-			direction = Point(0, 1);
-		}
-		else if (current == leftTexture) {
-			position += Point(-1, 0);
-			direction = Point(-1, 0);
-		}
-		else if (current == rightTexture) {
-			position += Point(rect.getWidth(), 0);
-			direction = Point(1, 0);
-		}
-
-		Bullet bullet(level, position, direction);
-		level.addBullet(bullet);
+		shoot(milliseconds);
 	}
-}
-
-
-// @override
-void Player::draw(void)
-{
-	const LevelDrawing & levelDrawing = level.getLevelDrawing();
-	Point screenPoint = levelDrawing.getScreenPoint(rect.getLeftTop());
-	const Point & gridSize = levelDrawing.getGridSize();
-	
-	int x = Math::floorDiv(xOffset * gridSize.getX(), MS_PER_GRID) + screenPoint.getX();
-	screenPoint.setX(x);
-	int y = Math::floorDiv(yOffset * gridSize.getY(), MS_PER_GRID) + screenPoint.getY();
-	screenPoint.setY(y);
-
-	DrawingManager & drawing = level.getDrawingManager();
-
-	draw_sprite(drawing.getBuffer(), current, screenPoint.getX(), screenPoint.getY());
 }

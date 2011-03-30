@@ -10,6 +10,7 @@ Game::Game(void)
 	install_keyboard();
 	install_timer();
 	initManager();
+	srand(unsigned int(time(NULL)));
 
 	level = new Level(*this);
 	monitor = new GameStateMonitor(*this);

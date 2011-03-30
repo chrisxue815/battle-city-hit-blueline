@@ -24,8 +24,7 @@ Bullet::Bullet(Level & level, const Point & point, const Point & direction)
 
 void Bullet::update(void)
 {
-	const TimeManager & timeManager = level.getTimeManager();
-	int milliseconds = timeManager.getInterval().getMilliseconds();
+	int milliseconds = level.getMilliseconds();	
 
 	updateMoving(milliseconds);
 	collisionDetection();
@@ -75,7 +74,7 @@ void Bullet::collisionDetection(void)
 	{
 		for (int y = rect.getTop(); y < yRange; y++)
 		{
-			const Tile * tile = level.getGrid(x, y);
+			const Tile * tile = level.getTile(x, y);
 			if (tile == NULL)
 				alive = false;
 			else if (tile->getBulletEvent() == BULLET_CANNOT_HIT) {
