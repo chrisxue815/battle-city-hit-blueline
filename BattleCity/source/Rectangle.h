@@ -20,6 +20,16 @@ namespace BattleCity
 		Rectangle(const Point & p1, const Point & p2);
 
 	public:
+		bool intersects(const Rectangle & rect);
+		bool intersects(const Point & point);
+
+	public:
+		Rectangle operator + (const Point & point);
+		Rectangle operator - (const Point & point);
+		Rectangle & operator += (const Point & point);
+		Rectangle & operator -= (const Point & point);
+
+	public:
 		int getLeft(void) const;
 		void setLeft(int left);
 
@@ -52,12 +62,6 @@ namespace BattleCity
 
 		Point getSize(void) const;
 		void setSize(const Point & size);
-
-	public:
-		Rectangle operator + (const Point & point);
-		Rectangle operator - (const Point & point);
-		Rectangle & operator += (const Point & point);
-		Rectangle & operator -= (const Point & point);
 	};
 
 	inline int Rectangle::getLeft(void) const {

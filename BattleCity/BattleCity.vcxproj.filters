@@ -238,5 +238,8 @@
     <CustomBuild Include="resource\texture\scene1\background.bmp">
       <Filter>Resource Files\texture\scene1</Filter>
     </CustomBuild>
+    <CustomBuild Include="resource\texture\scene1\enemyBirthplace.bmp">
+      <Filter>Resource Files\texture\scene1</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

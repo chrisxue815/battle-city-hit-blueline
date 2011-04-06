@@ -53,3 +53,31 @@ Rectangle::Rectangle(const Point & p1, const Point & p2)
 		height = p1.getY() - top;
 	}
 }
+
+
+bool Rectangle::intersects( const Rectangle & rect )
+{
+	if (getLeft() > rect.getRight() || getRight() < rect.getLeft() ||
+		getTop() > rect.getBottom() || getBottom() < rect.getTop())
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+
+bool Rectangle::intersects( const Point & point )
+{
+	if (point.getX() >= getLeft() && point.getX() <= getRight() &&
+		point.getY() >= getTop() && point.getY() <= getBottom())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}

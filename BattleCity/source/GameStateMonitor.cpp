@@ -26,7 +26,7 @@ void GameStateMonitor::showFps(const TimeManager & timeManager)
 void GameStateMonitor::showPlayerPoint(const Player & player)
 {
 	char str[20];
-	Point point = player.getPoint();
-	uszprintf(str, sizeof(str), "Player: %d,%d  ", point.getX(), point.getY());
+	Point point = player.getPosition();
+	uszprintf(str, sizeof(str), "Player: %d,%d  %d", point.getX(), point.getY(), player.getAlive());
 	ustrzncat(notification, sizeof(notification), str, sizeof(notification));
 }

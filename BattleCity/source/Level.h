@@ -18,7 +18,10 @@ namespace BattleCity
 	{
 	protected:
 		Player * player;
-		list<Enemy*> enemies;
+		list<Enemy> enemies;
+		vector<Point> enemyBirthplace;
+		bool enemyBirth;
+		int enemyBirthCooldown;
 		list<Bullet> bullets;
 
 		vector<vector<Tile*>> tiles;
@@ -26,6 +29,12 @@ namespace BattleCity
 
 		LevelDrawing levelDrawing;
 		BITMAP * background;
+
+	public:
+		void addBullet(Bullet & bullet);
+		void bulletHitTile(int x, int y);
+		void bulletHitEnemy(const Enemy & entity);
+		void bulletHitPlayer(void);
 
 	public:
 		int getRefreshRate(void) const;
@@ -38,12 +47,9 @@ namespace BattleCity
 
 	public:
 		const Player * getPlayer(void) const;
+		const list<Enemy> & getEnemies(void) const;
 		const Tile * getTile(int x, int y) const;
 		const Tile * getTile(const Point & point) const;
-
-		void addBullet(Bullet & bullet);
-		void bulletHit(int x, int y);
-		//void bulletHit(const Entity * entity);
 
 	public:
 		Level(Game & game);
@@ -57,6 +63,7 @@ namespace BattleCity
 	protected:
 		void initTanks(void);
 		void initTiles(void);
+		void generateEnemy(void);
 	};
 
 
@@ -84,8 +91,8 @@ namespace BattleCity
 		return player;
 	}
 
-	inline const LevelDrawing & Level::getLevelDrawing(void) const {
-		return levelDrawing;
+	inline const list<Enemy> & Level::getEnemies( void ) const {
+		return enemies;
 	}
 
 	inline const Tile * Level::getTile(int x, int y) const
@@ -102,6 +109,10 @@ namespace BattleCity
 		int x = point.getX();
 		int y = point.getY();
 		return getTile(x, y);
+	}
+
+	inline const LevelDrawing & Level::getLevelDrawing(void) const {
+		return levelDrawing;
 	}
 
 	inline void Level::addBullet(Bullet & bullet) {

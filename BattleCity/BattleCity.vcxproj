@@ -165,6 +165,9 @@
   <ItemGroup>
     <CustomBuild Include="resource\texture\scene1\background.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="resource\texture\scene1\enemyBirthplace.bmp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

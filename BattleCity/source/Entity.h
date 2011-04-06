@@ -18,13 +18,7 @@ namespace BattleCity
 	protected:
 		Level & level;
 		Rectangle rect;
-
-	public:
-		const Rectangle & getRect(void) const;
-		void setRect(const Rectangle & rect);
-
-		Point getPoint(void) const;
-		void setPoint(const Point & point);
+		bool alive;
 
 	protected:
 		Entity(Level & level);
@@ -33,6 +27,16 @@ namespace BattleCity
 	public:
 		virtual void update(void) = 0;
 		virtual void draw(void) = 0;
+
+	public:
+		const Rectangle & getRect(void) const;
+		void setRect(const Rectangle & rect);
+
+		Point getPosition(void) const;
+		void setPosition(const Point & position);
+
+		bool getAlive(void) const;
+		void setAlive(bool alive);
 
 	protected:
 		bool cannotGoLeft(void);
@@ -49,11 +53,19 @@ namespace BattleCity
 		this->rect = rect;
 	}
 
-	inline Point Entity::getPoint(void) const {
+	inline Point Entity::getPosition(void) const {
 		return rect.getLeftTop();
 	}
 
-	inline void Entity::setPoint(const Point & point) {
-		rect.setLeftTop(point);
+	inline void Entity::setPosition(const Point & position) {
+		rect.setLeftTop(position);
+	}
+
+	inline bool Entity::getAlive(void) const {
+		return alive;
+	}
+
+	inline void Entity::setAlive(bool alive) {
+		this->alive = alive;
 	}
 }

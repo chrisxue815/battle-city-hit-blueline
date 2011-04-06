@@ -17,11 +17,9 @@ Entity::Entity(Level & level, const Rectangle & rect)
 
 bool Entity::cannotGoLeft()
 {
-	int x = rect.getX() - 1;
-	int y = rect.getY();
-	int yRange = y + rect.getWidth();
+	int x = rect.getLeft() - 1;
 
-	for (; y < yRange; y++)
+	for (int y = rect.getTop(); y < rect.getBottom(); ++y)
 	{
 		const Tile * grid = level.getTile(x, y);
 		if (grid == NULL || ! grid->canPlayerGoThrough())
@@ -34,11 +32,9 @@ bool Entity::cannotGoLeft()
 
 bool Entity::cannotGoRight()
 {
-	int x = rect.getX() + rect.getWidth();
-	int y = rect.getY();
-	int yRange = y + rect.getWidth();
+	int x = rect.getRight();
 
-	for (; y < yRange; y++)
+	for (int y = rect.getTop(); y < rect.getBottom(); ++y)
 	{
 		const Tile * grid = level.getTile(x, y);
 		if (grid == NULL || ! grid->canPlayerGoThrough())
@@ -51,11 +47,9 @@ bool Entity::cannotGoRight()
 
 bool Entity::cannotGoUp()
 {
-	int x = rect.getX();
-	int y = rect.getY() - 1;
-	int xRange = x + rect.getHeight();
+	int y = rect.getTop() - 1;
 
-	for (; x < xRange; x++)
+	for (int x = rect.getLeft(); x < rect.getRight(); ++x)
 	{
 		const Tile * grid = level.getTile(x, y);
 		if (grid == NULL || ! grid->canPlayerGoThrough())
@@ -68,11 +62,9 @@ bool Entity::cannotGoUp()
 
 bool Entity::cannotGoDown()
 {
-	int x = rect.getX();
-	int y = rect.getY() + rect.getHeight();
-	int xRange = x + rect.getHeight();
+	int y = rect.getBottom();
 
-	for (; x < xRange; x++)
+	for (int x = rect.getLeft(); x < rect.getRight(); ++x)
 	{
 		const Tile * grid = level.getTile(x, y);
 		if (grid == NULL || ! grid->canPlayerGoThrough())

@@ -113,39 +113,36 @@ void Tank::move(int milliseconds)
 
 void Tank::shoot(int milliseconds)
 {
-	Point position = rect.getLeftTop();
-	Point direction;
+	Point bulletPosition = rect.getLeftTop();
+	Direction bulletDirection;
 
 	if (current == upTexture) {
-		position += Point(0, -1);
-		direction = Point(0, -1);
+		bulletPosition += Point(0, -1);
+		bulletDirection = UP;
 	}
 	else if (current == downTexture) {
-		position += Point(0, rect.getHeight());
-		direction = Point(0, 1);
+		bulletPosition += Point(0, rect.getHeight());
+		bulletDirection = DOWN;
 	}
 	else if (current == leftTexture) {
-		position += Point(-1, 0);
-		direction = Point(-1, 0);
+		bulletPosition += Point(-1, 0);
+		bulletDirection = LEFT;
 	}
 	else if (current == rightTexture) {
-		position += Point(rect.getWidth(), 0);
-		direction = Point(1, 0);
+		bulletPosition += Point(rect.getWidth(), 0);
+		bulletDirection = RIGHT;
 	}
 
-	Bullet bullet(level, position, direction);
+	Bullet bullet(level, this, bulletPosition, bulletDirection);
 	level.addBullet(bullet);
 }
 
 
 bool Tank::onIce(void)
 {
-	int xRange = rect.getLeft() + rect.getWidth();
-	int yRange = rect.getTop() + rect.getHeight();
-
-	for (int x = rect.getLeft(); x < xRange; x++)
+	for (int x = rect.getLeft(); x < rect.getRight(); x++)
 	{
-		for (int y = rect.getTop(); y < yRange; y++)
+		for (int y = rect.getTop(); y < rect.getBottom(); y++)
 		{
 			if (level.getTile(x, y)->speedUpPlayer())
 			{

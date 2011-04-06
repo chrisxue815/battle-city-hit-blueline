@@ -22,6 +22,7 @@ void Enemy::init( void )
 	msPerGrid = 150;
 	xOffset = 0;
 	yOffset = 0;
+	movingCooldown = 0;
 	shootingCooldown = 0;
 
 	loadContent();

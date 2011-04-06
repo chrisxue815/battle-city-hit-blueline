@@ -26,10 +26,6 @@ Level::~Level(void)
 {
 	delete player;
 
-	for (list<Enemy*>::iterator it = enemies.begin(); it != enemies.end(); ++it) {
-			delete (*it);
-	}
-
 	for (int i = 0; i < tiles.size(); i++) {
 		for (int j = 0; j < tiles[i].size(); j++) {
 			delete tiles[i][j];
@@ -41,7 +37,12 @@ Level::~Level(void)
 void Level::initTanks(void)
 {
 	player = new Player(*this, Point(10, 20));
-	enemies.push_back(new Enemy(*this, Point(0, 0)));
+	enemyBirthplace.push_back(Point(0, 0));
+	enemyBirthplace.push_back(Point(10, 0));
+	enemyBirthplace.push_back(Point(20, 0));
+	enemyBirthplace.push_back(Point(30, 0));
+	enemyBirth = true;
+	enemyBirthCooldown = 1000;
 }
 
 
@@ -92,19 +93,6 @@ void Level::initTiles(void)
 
 void Level::update(void)
 {
-	player->update();
-
-	// update enemies
-	for (list<Enemy*>::iterator it = enemies.begin(); it != enemies.end();)
-	{
-		(*it)->update();
-
-		if (! (*it)->getAlive())
-			it = enemies.erase(it);
-		else
-			++it;
-	}
-
 	// update bullets
 	for (list<Bullet>::iterator it = bullets.begin(); it != bullets.end();)
 	{
@@ -115,6 +103,25 @@ void Level::update(void)
 		else
 			++it;
 	}
+
+	player->update();
+
+	// update enemies
+	for (list<Enemy>::iterator it = enemies.begin(); it != enemies.end();)
+	{
+		it->update();
+
+		if (! it->getAlive())
+		{
+			it = enemies.erase(it);
+			enemyBirth = true;
+			enemyBirthCooldown = 500;
+		}
+		else
+			++it;
+	}
+
+	generateEnemy();
 }
 
 
@@ -138,8 +145,8 @@ void Level::draw(void)
 		}
 	}
 
-	for (list<Enemy*>::iterator it = enemies.begin(); it != enemies.end(); ++it) {
-		(*it)->draw();
+	for (list<Enemy>::iterator it = enemies.begin(); it != enemies.end(); ++it) {
+		it->draw();
 	}
 
 	player->draw();
@@ -158,8 +165,44 @@ void Level::draw(void)
 }
 
 
-void Level::bulletHit(int x, int y)
+void Level::bulletHitTile(int x, int y)
 {
 	delete tiles[x][y];
 	tiles[x][y] = new EmptySpace();
+}
+
+
+void Level::bulletHitEnemy(const Enemy & entity)
+{
+	for (list<Enemy>::iterator it = enemies.begin(); it != enemies.end(); ++it)
+	{
+		if (&(*it) == &entity)
+		{
+			it->setAlive(false);
+			break;
+		}
+	}
+}
+
+
+void Level::bulletHitPlayer( void )
+{
+	player->setAlive(false);
+}
+
+
+void Level::generateEnemy( void )
+{
+	int milliseconds = getMilliseconds();
+
+	if (enemyBirth)
+	{
+		enemyBirthCooldown -= milliseconds;
+		if (enemyBirthCooldown <= 0)
+		{
+			enemyBirth = false;
+			int birthplace = rand() % enemyBirthplace.size();
+			enemies.push_back(Enemy(*this, enemyBirthplace[birthplace]));
+		}
+	}
 }

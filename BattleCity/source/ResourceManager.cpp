@@ -19,6 +19,7 @@ ResourceManager::ResourceManager(char * dirPath, char * rootPath)
 	texture[POOL_FRAME] = loadBitmap("texture\\scene1\\pool.bmp");
 	texture[ICE_FRAME] = loadBitmap("texture\\scene1\\ice.bmp");
 	texture[BUSH_FRAME] = loadBitmap("texture\\scene1\\bush.bmp");
+	texture[ENEMY_BIRTHPLACE] = loadBitmap("texture\\scene1\\enemyBirthplace.bmp");
 	texture[BACKGROUND_FRAME] = loadBitmap("texture\\scene1\\background.bmp");
 }
 

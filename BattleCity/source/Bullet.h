@@ -15,13 +15,14 @@ namespace BattleCity
 	{
 	protected:
 		static const int MS_PER_GRID = 50;
-		Point direction;
+		const Entity * shooter;
+		Direction direction;
+		Point directionVector;
 		int offset;
-		bool alive;
 		BITMAP * texture;
 
 	public:
-		Bullet(Level & level, const Point & point, const Point & direction);
+		Bullet(Level & level, const Entity * shooter, const Point & point, Direction direction);
 
 	public:
 		// @override
@@ -29,15 +30,8 @@ namespace BattleCity
 		// @override
 		void draw(void);
 
-	public:
-		bool getAlive(void);
-
 	protected:
 		void updateMoving(int milliseconds);
 		void collisionDetection(void);
 	};
-
-	inline bool Bullet::getAlive(void) {
-		return alive;
-	}
 }
