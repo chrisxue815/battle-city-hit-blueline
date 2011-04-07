@@ -51,7 +51,6 @@ void Level::initTiles(void)
 	const ResourceManager & resource = game.getResourceManager();
 
 	tiles.reserve(LEVEL_GRID_WIDTH);
-
 	for (int i = 0; i < LEVEL_GRID_WIDTH; i++)
 	{
 		vector<Tile*> vt;
@@ -98,7 +97,7 @@ void Level::update(void)
 	{
 		it->update();
 
-		if (! it->getAlive())
+		if (it->getLives() == 0)
 			it = bullets.erase(it);
 		else
 			++it;
@@ -111,7 +110,7 @@ void Level::update(void)
 	{
 		it->update();
 
-		if (! it->getAlive())
+		if (it->getLives() == 0)
 		{
 			it = enemies.erase(it);
 			enemyBirth = true;
@@ -178,7 +177,7 @@ void Level::bulletHitEnemy(const Enemy & entity)
 	{
 		if (&(*it) == &entity)
 		{
-			it->setAlive(false);
+			it->loseALife();
 			break;
 		}
 	}
@@ -187,7 +186,7 @@ void Level::bulletHitEnemy(const Enemy & entity)
 
 void Level::bulletHitPlayer( void )
 {
-	player->setAlive(false);
+	player->loseALife();
 }
 
 

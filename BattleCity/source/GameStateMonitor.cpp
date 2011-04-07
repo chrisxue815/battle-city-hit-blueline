@@ -27,6 +27,6 @@ void GameStateMonitor::showPlayerPoint(const Player & player)
 {
 	char str[20];
 	Point point = player.getPosition();
-	uszprintf(str, sizeof(str), "Player: %d,%d  %d", point.getX(), point.getY(), player.getAlive());
+	uszprintf(str, sizeof(str), "Player: %d,%d  %d", point.getX(), point.getY(), player.getLives());
 	ustrzncat(notification, sizeof(notification), str, sizeof(notification));
 }

@@ -11,7 +11,9 @@ namespace BattleCity
 		BULLET_CANNOT_HIT
 	};
 
-	// interface
+	/**
+	 * 砖块Brick、钢铁Steel、水面Pool、冰面Ice、树林Bush、空地EmptySpace的基类。
+	 */
 	class Tile
 	{
 	protected:

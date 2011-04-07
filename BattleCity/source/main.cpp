@@ -11,7 +11,6 @@ int main()
 	try
 	{
 		Game game;
-
 		game.execute();
 	}
 	catch (GameException ex)

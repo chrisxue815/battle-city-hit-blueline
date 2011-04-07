@@ -14,17 +14,28 @@
 
 namespace BattleCity
 {
+	/**
+	 * 游戏的关卡。
+	 *
+	 * 主要变量：
+	 * <ul>
+	 * <li> #player 玩家；</li>
+	 * <li> #enemies 敌人；</li>
+	 * <li> #bullets 子弹；</li>
+	 * <li> #tiles 地面。</li>
+	 * </ul>
+	 */
 	class Level : public Component
 	{
 	protected:
 		Player * player;
 		list<Enemy> enemies;
+		list<Bullet> bullets;
+		vector<vector<Tile*>> tiles;
+
 		vector<Point> enemyBirthplace;
 		bool enemyBirth;
 		int enemyBirthCooldown;
-		list<Bullet> bullets;
-
-		vector<vector<Tile*>> tiles;
 		list<Point> bushTiles;
 
 		LevelDrawing levelDrawing;

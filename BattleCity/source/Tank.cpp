@@ -22,7 +22,7 @@ Tank::Tank(Level & level, const Point & point)
 
 void Tank::init(void)
 {
-	alive = true;
+	lives = 1;
 
 	msPerGrid = 150;
 	xOffset = 0;

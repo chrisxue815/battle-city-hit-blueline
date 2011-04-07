@@ -11,14 +11,14 @@ namespace BattleCity
 {
 	class Level;
 	/**
-		*Entity是一个能在Level中运行的类
-	*/
+	 * Entity是一个能在Level中运行的类，是玩家Player、敌人Enemy、子弹Bullet的基类。
+	 */
 	class Entity
 	{
 	protected:
 		Level & level;
 		Rectangle rect;
-		bool alive;
+		int lives;
 
 	protected:
 		Entity(Level & level);
@@ -35,14 +35,17 @@ namespace BattleCity
 		Point getPosition(void) const;
 		void setPosition(const Point & position);
 
-		bool getAlive(void) const;
-		void setAlive(bool alive);
+		int getLives(void) const;
+		void setLives(int lives);
+		void loseALife(void);
 
 	protected:
 		bool cannotGoLeft(void);
 		bool cannotGoRight(void);
 		bool cannotGoUp(void);
 		bool cannotGoDown(void);
+		bool tileCollision(Rectangle rect);
+		bool tankCollision(Rectangle rect);
 	};
 
 	inline const Rectangle & Entity::getRect(void) const {
@@ -61,11 +64,15 @@ namespace BattleCity
 		rect.setLeftTop(position);
 	}
 
-	inline bool Entity::getAlive(void) const {
-		return alive;
+	inline int Entity::getLives(void) const {
+		return lives;
 	}
 
-	inline void Entity::setAlive(bool alive) {
-		this->alive = alive;
+	inline void Entity::setLives(int lives) {
+		this->lives = lives;
+	}
+
+	inline void Entity::loseALife( void ) {
+		--this->lives;
 	}
 }

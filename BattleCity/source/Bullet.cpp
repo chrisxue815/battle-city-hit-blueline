@@ -92,12 +92,12 @@ void Bullet::collisionDetection(void)
 				const Tile * tile = level.getTile(x, y);
 
 				if (tile == NULL)
-					alive = false;
+					lives = 0;
 				else if (tile->getBulletEvent() == BULLET_CANNOT_HIT) {
-					alive = false;
+					lives = 0;
 				}
 				else if (tile->getBulletEvent() == BULLET_CAN_HIT) {
-					alive = false;
+					lives = 0;
 					level.bulletHitTile(x, y);
 				}
 			}
@@ -112,7 +112,7 @@ void Bullet::collisionDetection(void)
 		if (player != shooter && rect.intersects(playerRect))
 		{
 			level.bulletHitPlayer();
-			alive = false;
+			lives = 0;
 		}
 	}
 
@@ -126,7 +126,7 @@ void Bullet::collisionDetection(void)
 			if (&(*it) != shooter && rect.intersects(it->getRect()))
 			{
 				level.bulletHitEnemy(*it);
-				alive = false;
+				lives = 0;
 			}
 		}
 	}

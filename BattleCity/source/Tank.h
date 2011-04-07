@@ -16,8 +16,6 @@ namespace BattleCity
 		static const int TANK_GRID_HEIGHT = 2;
 		static const float ICE_COEFFICIENT;
 
-		bool alive;
-
 		int msPerGrid;  //  1/speed
 		int xOffset;
 		int yOffset;
@@ -36,10 +34,6 @@ namespace BattleCity
 		Tank(Level & level, const Point & point);
 
 	public:
-		const bool getAlive(void) const;
-		void setAlive(bool alive);
-
-	public:
 		// @override
 		void draw(void);
 
@@ -49,12 +43,4 @@ namespace BattleCity
 		void shoot(int milliseconds);
 		bool onIce(void);
 	};
-
-	inline const bool Tank::getAlive(void) const {
-		return alive;
-	}
-
-	inline void Tank::setAlive(bool alive) {
-		this->alive = alive;
-	}
 }

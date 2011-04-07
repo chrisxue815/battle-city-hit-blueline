@@ -6,6 +6,7 @@ using namespace BattleCity;
 Entity::Entity(Level & level)
 	: level(level), rect(0, 0, 0, 0)
 {
+	lives = 0;
 }
 
 
@@ -17,57 +18,61 @@ Entity::Entity(Level & level, const Rectangle & rect)
 
 bool Entity::cannotGoLeft()
 {
-	int x = rect.getLeft() - 1;
+	Rectangle collisionRect(rect.getLeft() - 1, rect.getTop(), 1, rect.getHeight());
 
-	for (int y = rect.getTop(); y < rect.getBottom(); ++y)
-	{
-		const Tile * grid = level.getTile(x, y);
-		if (grid == NULL || ! grid->canPlayerGoThrough())
-			return true;
-	}
-
-	return false;
+	return tileCollision(collisionRect) || tankCollision(collisionRect);
 }
 
 
 bool Entity::cannotGoRight()
 {
-	int x = rect.getRight();
+	Rectangle collisionRect(rect.getRight(), rect.getTop(), 1, rect.getHeight());
 
-	for (int y = rect.getTop(); y < rect.getBottom(); ++y)
-	{
-		const Tile * grid = level.getTile(x, y);
-		if (grid == NULL || ! grid->canPlayerGoThrough())
-			return true;
-	}
-
-	return false;
+	return tileCollision(collisionRect) || tankCollision(collisionRect);
 }
 
 
 bool Entity::cannotGoUp()
 {
-	int y = rect.getTop() - 1;
+	Rectangle collisionRect(rect.getLeft(), rect.getTop() - 1, rect.getWidth(), 1);
 
-	for (int x = rect.getLeft(); x < rect.getRight(); ++x)
-	{
-		const Tile * grid = level.getTile(x, y);
-		if (grid == NULL || ! grid->canPlayerGoThrough())
-			return true;
-	}
-
-	return false;
+	return tileCollision(collisionRect) || tankCollision(collisionRect);
 }
 
 
 bool Entity::cannotGoDown()
 {
-	int y = rect.getBottom();
+	Rectangle collisionRect(rect.getLeft(), rect.getBottom(), rect.getWidth(), 1);
 
+	return tileCollision(collisionRect) || tankCollision(collisionRect);
+}
+
+
+bool Entity::tileCollision( Rectangle rect )
+{
 	for (int x = rect.getLeft(); x < rect.getRight(); ++x)
 	{
-		const Tile * grid = level.getTile(x, y);
-		if (grid == NULL || ! grid->canPlayerGoThrough())
+		for (int y = rect.getTop(); y < rect.getBottom(); ++y)
+		{
+			const Tile * tile = level.getTile(x, y);
+			if (tile == NULL || ! tile->canPlayerGoThrough())
+				return true;
+		}
+	}
+	return false;
+}
+
+
+bool Entity::tankCollision( Rectangle rect )
+{
+	const Player * player = level.getPlayer();
+	if (rect.intersects(player->getRect()))
+		return true;
+
+	const list<Enemy> & enemies = level.getEnemies();
+	for (list<Enemy>::const_iterator it = enemies.begin(); it != enemies.end(); ++it)
+	{
+		if (rect.intersects(it->getRect()))
 			return true;
 	}
 
