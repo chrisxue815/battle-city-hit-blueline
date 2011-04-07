@@ -1,4 +1,4 @@
-#include "Player.h"
+ï»¿#include "Player.h"
 #include "Level.h"
 using namespace BattleCity;
 
@@ -69,7 +69,7 @@ void Player::updateMoving(int milliseconds)
 		yMove += 1;
 	}
 
-	// Ö»ÄÜÏòÒ»¸öÔË¶¯
+	// åªèƒ½å‘ä¸€ä¸ªè¿åŠ¨
 	if (xMove != 0 && yMove != 0)
 	{
 		if (key[KEY_LEFT] && !lastKeyLeft || key[KEY_RIGHT] && !lastKeyRight)

@@ -1,4 +1,4 @@
-#include "GameException.h"
+﻿#include "GameException.h"
 using namespace BattleCity;
 
 GameException::GameException(void)

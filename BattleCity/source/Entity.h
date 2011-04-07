@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Component.h"
 #include "Rectangle.h"
@@ -11,7 +11,7 @@ namespace BattleCity
 {
 	class Level;
 	/**
-		*EntityÊÇÒ»¸öÄÜÔÚLevelÖĞÔËĞĞµÄÀà	
+		*Entityæ˜¯ä¸€ä¸ªèƒ½åœ¨Levelä¸­è¿è¡Œçš„ç±»
 	*/
 	class Entity
 	{

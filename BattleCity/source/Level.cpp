@@ -1,4 +1,4 @@
-#include "Level.h"
+ï»¿#include "Level.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "Brick.h"
@@ -155,7 +155,7 @@ void Level::draw(void)
 		it->draw();
 	}
 
-	// °ÑBushÏÔÊ¾ÔÚ×îÉÏÃæ
+	// æŠŠBushæ˜¾ç¤ºåœ¨æœ€ä¸Šé¢
 	for (list<Point>::iterator it = bushTiles.begin(); it != bushTiles.end(); ++it) {
 		Tile * tile = tiles[it->getX()][it->getY()];
 		DrawingManager & drawing = game.getDrawingManager();

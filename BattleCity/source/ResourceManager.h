@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "GameException.h"
 #include "Macro.h"

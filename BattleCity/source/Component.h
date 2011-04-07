@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ResourceManager.h"
 #include "DrawingManager.h"
@@ -10,7 +10,7 @@ namespace BattleCity
 	class Game;
 
 	/**
-		*ComponentÊÇÒ»¸öÄÜÔÚGameÖĞÔËĞĞµÄÀà£»
+		*Componentæ˜¯ä¸€ä¸ªèƒ½åœ¨Gameä¸­è¿è¡Œçš„ç±»ï¼›
 	*/
 	class Component
 	{

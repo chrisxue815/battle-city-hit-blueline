@@ -1,4 +1,4 @@
-#include "Enemy.h"
+﻿#include "Enemy.h"
 #include "Level.h"
 using namespace BattleCity;
 
@@ -44,8 +44,16 @@ void Enemy::loadContent(void)
 
 void Enemy::update(void)
 {
+	srand(unsigned int(time(NULL)));
 	int milliseconds = level.getMilliseconds();	
 
+	updateMoving(milliseconds);
+	updateShooting(milliseconds);
+}
+
+
+void Enemy::updateMoving(int milliseconds)
+{
 	if (movingCooldown > 0)
 	{
 		movingCooldown -= milliseconds;
@@ -75,7 +83,11 @@ void Enemy::update(void)
 
 	if (direction == NO_DIRECTION)
 		movingCooldown = 0;
-	
+}
+
+
+void Enemy::updateShooting(int milliseconds)
+{
 	if (shootingCooldown > 0)
 	{
 		shootingCooldown -= milliseconds;
@@ -87,16 +99,4 @@ void Enemy::update(void)
 		if (rand() % 2)
 			shoot(milliseconds);
 	}
-}
-
-
-void Enemy::updateMoving(int milliseconds)
-{
-
-}
-
-
-void Enemy::updateShooting(int milliseconds)
-{
-
 }

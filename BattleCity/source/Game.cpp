@@ -1,4 +1,4 @@
-#include "Game.h"
+﻿#include "Game.h"
 #include "Level.h"
 #include "GameStateMonitor.h"
 using namespace BattleCity;
@@ -10,7 +10,6 @@ Game::Game(void)
 	install_keyboard();
 	install_timer();
 	initManager();
-	srand(unsigned int(time(NULL)));
 
 	level = new Level(*this);
 	monitor = new GameStateMonitor(*this);
@@ -74,9 +73,9 @@ void Game::update(void)
 {
 	level->update();
 
+	//DEBUG: monitor用于debug
 	monitor->update();
 	monitor->showFps(*timeManager);
-
 	const Player * player = level->getPlayer();
 	if (player != NULL)
 		monitor->showPlayerPoint(*player);

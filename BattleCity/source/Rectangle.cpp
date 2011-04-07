@@ -1,4 +1,4 @@
-#include "Rectangle.h"
+﻿#include "Rectangle.h"
 using namespace BattleCity;
 
 
@@ -57,8 +57,8 @@ Rectangle::Rectangle(const Point & p1, const Point & p2)
 
 bool Rectangle::intersects( const Rectangle & rect )
 {
-	if (getLeft() > rect.getRight() || getRight() < rect.getLeft() ||
-		getTop() > rect.getBottom() || getBottom() < rect.getTop())
+	if (getLeft() >= rect.getRight() || getRight() <= rect.getLeft() ||
+		getTop() >= rect.getBottom() || getBottom() <= rect.getTop())
 	{
 		return false;
 	}

@@ -1,4 +1,4 @@
-#include "Tank.h"
+ï»¿#include "Tank.h"
 #include "Level.h"
 using namespace BattleCity;
 
@@ -40,7 +40,7 @@ void Tank::init(void)
 
 void Tank::move(int milliseconds)
 {
-	// ¸Ä±ä³¯Ïò
+	// æ”¹å˜æœå‘
 	switch (direction)
 	{
 	case LEFT:
@@ -59,7 +59,7 @@ void Tank::move(int milliseconds)
 		return;
 	}
 
-	// Åö×²¼ì²â
+	// ç¢°æ’æ£€æµ‹
 	if (direction == LEFT && xOffset <= 0 && cannotGoLeft() ||
 		direction == RIGHT && xOffset >= 0 && cannotGoRight() ||
 		direction == UP && yOffset <= 0 && cannotGoUp() ||
@@ -68,11 +68,11 @@ void Tank::move(int milliseconds)
 		direction = NO_DIRECTION;
 	}
 
-	// ²Èµ½±ù»á¼ÓËÙ
+	// è¸©åˆ°å†°ä¼šåŠ é€Ÿ
 	if (direction != NO_DIRECTION && onIce())
 		milliseconds *= ICE_COEFFICIENT;
 
-	// ÒÆ¶¯
+	// ç§»åŠ¨
 	switch (direction)
 	{
 	case LEFT:
