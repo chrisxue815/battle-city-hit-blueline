@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Component.h"
+#include "LevelComponent.h"
 #include "Rectangle.h"
 #include "Point.h"
 #include "ResourceManager.h"
@@ -13,20 +13,15 @@ namespace BattleCity
 	/**
 	 * Entity是一个能在Level中运行的类，是玩家Player、敌人Enemy、子弹Bullet的基类。
 	 */
-	class Entity
+	class Entity : public LevelComponent
 	{
 	protected:
-		Level & level;
 		Rectangle rect;
 		int lives;
 
 	protected:
 		Entity(Level & level);
 		Entity(Level & level, const Rectangle & rect);
-
-	public:
-		virtual void update(void) = 0;
-		virtual void draw(void) = 0;
 
 	public:
 		const Rectangle & getRect(void) const;
@@ -44,8 +39,6 @@ namespace BattleCity
 		bool cannotGoRight(void);
 		bool cannotGoUp(void);
 		bool cannotGoDown(void);
-		bool tileCollision(Rectangle rect);
-		bool tankCollision(Rectangle rect);
 	};
 
 	inline const Rectangle & Entity::getRect(void) const {

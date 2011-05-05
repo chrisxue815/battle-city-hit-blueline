@@ -1,5 +1,8 @@
 ﻿#include "Tank.h"
 #include "Level.h"
+#include "Bullet.h"
+#include "Tile.h"
+#include "BattleCityMath.h"
 using namespace BattleCity;
 
 
@@ -24,7 +27,7 @@ void Tank::init(void)
 {
 	lives = 1;
 
-	msPerGrid = 150;
+	MS_PER_GRID = 150;
 	xOffset = 0;
 	yOffset = 0;
 
@@ -78,32 +81,32 @@ void Tank::move(int milliseconds)
 	case LEFT:
 		xOffset -= milliseconds;
 		yOffset = 0;
-		if (xOffset <= -msPerGrid / 2) {
-			xOffset += msPerGrid;
+		if (xOffset <= -MS_PER_GRID / 2) {
+			xOffset += MS_PER_GRID;
 			rect -= Point(1, 0);
 		}
 		break;
 	case RIGHT:
 		xOffset += milliseconds;
 		yOffset = 0;
-		if (xOffset >= msPerGrid / 2) {
-			xOffset -= msPerGrid;
+		if (xOffset >= MS_PER_GRID / 2) {
+			xOffset -= MS_PER_GRID;
 			rect += Point(1, 0);
 		}
 		break;
 	case UP:
 		yOffset -= milliseconds;
 		xOffset = 0;
-		if (yOffset <= -msPerGrid / 2) {
-			yOffset += msPerGrid;
+		if (yOffset <= -MS_PER_GRID / 2) {
+			yOffset += MS_PER_GRID;
 			rect -= Point(0, 1);
 		}
 		break;
 	case DOWN:
 		yOffset += milliseconds;
 		xOffset = 0;
-		if (yOffset >= msPerGrid / 2) {
-			yOffset -= msPerGrid;
+		if (yOffset >= MS_PER_GRID / 2) {
+			yOffset -= MS_PER_GRID;
 			rect += Point(0, 1);
 		}
 		break;
@@ -140,9 +143,9 @@ void Tank::shoot(int milliseconds)
 
 bool Tank::onIce(void)
 {
-	for (int x = rect.getLeft(); x < rect.getRight(); x++)
+	for (int x = rect.getLeft(); x <= rect.getRight(); x++)
 	{
-		for (int y = rect.getTop(); y < rect.getBottom(); y++)
+		for (int y = rect.getTop(); y <= rect.getBottom(); y++)
 		{
 			if (level.getTile(x, y)->speedUpPlayer())
 			{
@@ -162,9 +165,9 @@ void Tank::draw(void)
 	Point screenPoint = levelDrawing.getScreenPoint(rect.getLeftTop());
 	const Point & gridSize = levelDrawing.getGridSize();
 
-	int x = Math::floorDiv(xOffset * gridSize.getX(), msPerGrid) + screenPoint.getX();
+	int x = Math::floorDiv(xOffset * gridSize.getX(), MS_PER_GRID) + screenPoint.getX();
 	screenPoint.setX(x);
-	int y = Math::floorDiv(yOffset * gridSize.getY(), msPerGrid) + screenPoint.getY();
+	int y = Math::floorDiv(yOffset * gridSize.getY(), MS_PER_GRID) + screenPoint.getY();
 	screenPoint.setY(y);
 
 	DrawingManager & drawing = level.getDrawingManager();

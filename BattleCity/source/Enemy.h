@@ -8,25 +8,36 @@
 
 namespace BattleCity
 {
+	enum EnemyType
+	{
+		ENEMY_NORMAL,
+		ENEMY_HIGH_SPEED,
+		ENEMY_HIGH_ARMOR,
+		ENEMY_HIGH_DAMAGE
+	};
+
 	class Enemy : public Tank
 	{
 	protected:
-		static const int MOVING_COOLDOWN = 1000;
-		static const int SHOOTING_COOLDOWN = 1000;
+		EnemyType enemyType;
+		int MOVING_COOLDOWN;
+		int SHOOTING_COOLDOWN;
 
 		int movingCooldown;
 		int shootingCooldown;
 
 	public:
-		Enemy(Level & level);
-		Enemy(Level & level, const Point &);
+		Enemy(Level & level, EnemyType enemyType = ENEMY_NORMAL);
+		Enemy(Level & level, const Point &, EnemyType enemyType = ENEMY_NORMAL);
 
 	public:
 		// @override
 		void update(void);
+		// @override
+		TankType getTankType(void) const { return ENEMY_TANK; }
 
 	protected:
-		void init(void);
+		void init(EnemyType enemyType);
 		void loadContent(void);
 		void updateMoving(int milliseconds);
 		void updateShooting(int milliseconds);

@@ -1,9 +1,13 @@
 ﻿#include "Bullet.h"
 #include "Level.h"
+#include "Player.h"
+#include "Enemy.h"
+#include "Tile.h"
+#include "BattleCityMath.h"
 using namespace BattleCity;
 
 
-Bullet::Bullet(Level & level, const Entity * shooter, const Point & point, Direction direction)
+Bullet::Bullet(Level & level, const Tank * shooter, const Point & point, Direction direction)
 	: Entity(level, Rectangle(point, 0, 0))
 {
 	this->shooter = shooter;
@@ -83,11 +87,11 @@ void Bullet::updateMoving(int milliseconds)
 
 void Bullet::collisionDetection(void)
 {
-	// tiles
+	// hit tiles
 	{
-		for (int x = rect.getLeft(); x < rect.getRight(); ++x)
+		for (int x = rect.getLeft(); x <= rect.getRight(); ++x)
 		{
-			for (int y = rect.getTop(); y < rect.getBottom(); ++y)
+			for (int y = rect.getTop(); y <= rect.getBottom(); ++y)
 			{
 				const Tile * tile = level.getTile(x, y);
 
@@ -104,26 +108,28 @@ void Bullet::collisionDetection(void)
 		}
 	}
 
-	// player
+	// hit the player
+	if (shooter->getTankType() != PLAYER_TANK)
 	{
 		const Player * player = level.getPlayer();
 		const Rectangle & playerRect = player->getRect();
 
-		if (player != shooter && rect.intersects(playerRect))
+		if (rect.intersects(playerRect))
 		{
 			level.bulletHitPlayer();
 			lives = 0;
 		}
 	}
 
-	// enemies
+	// hit enemies
+	if (shooter->getTankType() != ENEMY_TANK)
 	{
 		const list<Enemy> & enemies  = level.getEnemies();
 
 		//TODO: fix this hard code
 		for (list<Enemy>::const_iterator it = enemies.begin(); it != enemies.end(); ++it)
 		{
-			if (&(*it) != shooter && rect.intersects(it->getRect()))
+			if (rect.intersects(it->getRect()))
 			{
 				level.bulletHitEnemy(*it);
 				lives = 0;

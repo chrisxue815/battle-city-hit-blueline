@@ -97,19 +97,19 @@ namespace BattleCity
 	}
 
 	inline int Rectangle::getRight(void) const {
-		return left + width;
+		return left + width - 1;
 	}
 
 	inline void Rectangle::setRight(int right) {
-		this->left = right - width;
+		this->left = right - width + 1;
 	}
 
 	inline int Rectangle::getBottom(void) const {
-		return top + height;
+		return top + height - 1;
 	}
 
 	inline void Rectangle::setBottom(int bottom) {
-		this->top = bottom - height;
+		this->top = bottom - height + 1;
 	}
 
 	inline Point Rectangle::getLeftTop(void) const {

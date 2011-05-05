@@ -3,23 +3,42 @@
 using namespace BattleCity;
 
 
-Enemy::Enemy(Level & level)
+Enemy::Enemy(Level & level, EnemyType enemyType)
 	: Tank(level)
 {
-	init();
+	init(enemyType);
 }
 
 
-Enemy::Enemy(Level & level, const Point & point)
+Enemy::Enemy(Level & level, const Point & point, EnemyType enemyType)
 	: Tank(level, point)
 {
-	init();
+	init(enemyType);
 }
 
 
-void Enemy::init( void )
+void Enemy::init(EnemyType enemyType)
 {
-	msPerGrid = 150;
+	this->enemyType = enemyType;
+
+	MS_PER_GRID = 150;
+	MOVING_COOLDOWN = 1000;
+	SHOOTING_COOLDOWN = 1000;
+
+	switch (enemyType)
+	{
+	case ENEMY_HIGH_SPEED:
+		MS_PER_GRID = 75;
+		MOVING_COOLDOWN = 500;
+		break;
+	case ENEMY_HIGH_ARMOR:
+		lives = 4;
+		break;
+	case ENEMY_HIGH_DAMAGE:
+		SHOOTING_COOLDOWN = 500;
+		break;
+	}
+
 	xOffset = 0;
 	yOffset = 0;
 	movingCooldown = 0;
@@ -44,8 +63,7 @@ void Enemy::loadContent(void)
 
 void Enemy::update(void)
 {
-	srand(unsigned int(time(NULL)));
-	int milliseconds = level.getMilliseconds();	
+	int milliseconds = level.getMilliseconds();
 
 	updateMoving(milliseconds);
 	updateShooting(milliseconds);

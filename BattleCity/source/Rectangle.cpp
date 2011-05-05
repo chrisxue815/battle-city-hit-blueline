@@ -57,8 +57,8 @@ Rectangle::Rectangle(const Point & p1, const Point & p2)
 
 bool Rectangle::intersects( const Rectangle & rect )
 {
-	if (getLeft() >= rect.getRight() || getRight() <= rect.getLeft() ||
-		getTop() >= rect.getBottom() || getBottom() <= rect.getTop())
+	if (getLeft() > rect.getRight() || getRight() < rect.getLeft() ||
+		getTop() > rect.getBottom() || getBottom() < rect.getTop())
 	{
 		return false;
 	}
@@ -71,13 +71,13 @@ bool Rectangle::intersects( const Rectangle & rect )
 
 bool Rectangle::intersects( const Point & point )
 {
-	if (point.getX() >= getLeft() && point.getX() <= getRight() &&
-		point.getY() >= getTop() && point.getY() <= getBottom())
+	if (getLeft() > point.getX() || getRight() < point.getX() ||
+		getTop() > point.getY() || getBottom() < point.getY())
 	{
-		return true;
+		return false;
 	}
 	else
 	{
-		return false;
+		return true;
 	}
 }

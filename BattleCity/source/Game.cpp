@@ -16,6 +16,8 @@ Game::Game(void)
 
 	refreshRate = get_refresh_rate();
 	running = true;
+
+	srand(unsigned int(time(NULL)));
 }
 
 

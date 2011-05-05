@@ -52,10 +52,10 @@
     <Filter Include="Source Files\Tile">
       <UniqueIdentifier>{6565817b-65b8-4125-9932-f638092703e3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Entity">
+    <Filter Include="Header Files\LevelComponent">
       <UniqueIdentifier>{c53bb6c4-e84b-478f-80de-5c0026705a39}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Entity">
+    <Filter Include="Source Files\LevelComponent">
       <UniqueIdentifier>{29f9515b-4e34-4034-8196-652f15fdb4db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -100,25 +100,37 @@
       <Filter>Source Files\Helper</Filter>
     </ClCompile>
     <ClCompile Include="source\Player.cpp">
-      <Filter>Source Files\Entity</Filter>
+      <Filter>Source Files\LevelComponent</Filter>
     </ClCompile>
     <ClCompile Include="source\Bullet.cpp">
-      <Filter>Source Files\Entity</Filter>
+      <Filter>Source Files\LevelComponent</Filter>
     </ClCompile>
     <ClCompile Include="source\Entity.cpp">
-      <Filter>Source Files\Entity</Filter>
+      <Filter>Source Files\LevelComponent</Filter>
     </ClCompile>
     <ClCompile Include="source\Rectangle.cpp">
       <Filter>Source Files\Helper</Filter>
     </ClCompile>
     <ClCompile Include="source\Tank.cpp">
-      <Filter>Source Files\Entity</Filter>
+      <Filter>Source Files\LevelComponent</Filter>
     </ClCompile>
     <ClCompile Include="source\Enemy.cpp">
-      <Filter>Source Files\Entity</Filter>
+      <Filter>Source Files\LevelComponent</Filter>
     </ClCompile>
     <ClCompile Include="source\BattleCityMath.cpp">
       <Filter>Source Files\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="source\EnemyList.cpp">
+      <Filter>Source Files\LevelComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BulletController.cpp">
+      <Filter>Source Files\LevelComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TileController.cpp">
+      <Filter>Source Files\LevelComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="source\EnemyController.cpp">
+      <Filter>Source Files\LevelComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,11 +170,8 @@
     <ClInclude Include="source\DrawingManager.h">
       <Filter>Header Files\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="source\Component.h">
-      <Filter>Header Files\Helper</Filter>
-    </ClInclude>
     <ClInclude Include="source\Player.h">
-      <Filter>Header Files\Entity</Filter>
+      <Filter>Header Files\LevelComponent</Filter>
     </ClInclude>
     <ClInclude Include="source\Brick.h">
       <Filter>Header Files\Tile</Filter>
@@ -174,16 +183,16 @@
       <Filter>Header Files\Tile</Filter>
     </ClInclude>
     <ClInclude Include="source\Bullet.h">
-      <Filter>Header Files\Entity</Filter>
+      <Filter>Header Files\LevelComponent</Filter>
     </ClInclude>
     <ClInclude Include="source\Entity.h">
-      <Filter>Header Files\Entity</Filter>
+      <Filter>Header Files\LevelComponent</Filter>
     </ClInclude>
     <ClInclude Include="source\Rectangle.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
     <ClInclude Include="source\Tank.h">
-      <Filter>Header Files\Entity</Filter>
+      <Filter>Header Files\LevelComponent</Filter>
     </ClInclude>
     <ClInclude Include="source\Steel.h">
       <Filter>Header Files\Tile</Filter>
@@ -198,10 +207,28 @@
       <Filter>Header Files\Tile</Filter>
     </ClInclude>
     <ClInclude Include="source\Enemy.h">
-      <Filter>Header Files\Entity</Filter>
+      <Filter>Header Files\LevelComponent</Filter>
     </ClInclude>
     <ClInclude Include="source\BattleCityMath.h">
       <Filter>Header Files\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="source\EnemyList.h">
+      <Filter>Header Files\LevelComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GameComponent.h">
+      <Filter>Header Files\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="source\LevelComponent.h">
+      <Filter>Header Files\LevelComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BulletController.h">
+      <Filter>Header Files\LevelComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TileController.h">
+      <Filter>Header Files\LevelComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="source\EnemyController.h">
+      <Filter>Header Files\LevelComponent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

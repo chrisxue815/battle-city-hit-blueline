@@ -8,3 +8,5 @@ glob:BattleCity.suo
 glob:doc/*
 glob:testResource/*
 glob:*.vsp
+syntax: glob
+BattleCity/test/*

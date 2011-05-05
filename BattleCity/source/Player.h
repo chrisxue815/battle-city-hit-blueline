@@ -24,6 +24,8 @@ namespace BattleCity
 
 		// @override
 		void update(void);
+		// @override
+		TankType getTankType(void) const { return PLAYER_TANK; }
 
 	protected:
 		void init(void);

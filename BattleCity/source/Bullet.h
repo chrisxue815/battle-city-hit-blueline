@@ -9,20 +9,20 @@
 
 namespace BattleCity
 {
-	class Level;
-
 	class Bullet : public Entity
 	{
 	protected:
 		static const int MS_PER_GRID = 50;
-		const Entity * shooter;
+
+		const Tank * shooter;
 		Direction direction;
 		Point directionVector;
 		int offset;
+
 		BITMAP * texture;
 
 	public:
-		Bullet(Level & level, const Entity * shooter, const Point & point, Direction direction);
+		Bullet(Level & level, const Tank * shooter, const Point & point, Direction direction);
 
 	public:
 		// @override

@@ -1,12 +1,10 @@
 ﻿#pragma once
 
 #include "Game.h"
+#include "GameComponent.h"
 #include "TimeManager.h"
 #include "LevelDrawing.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "Bullet.h"
-#include "Tile.h"
+#include "Rectangle.h"
 #include <allegro.h>
 #include <vector>
 #include <list>
@@ -14,6 +12,14 @@
 
 namespace BattleCity
 {
+	class Player;
+	class Enemy;
+	class Bullet;
+	class Tile;
+	class EnemyController;
+	class BulletController;
+	class TileController;
+
 	/**
 	 * 游戏的关卡。
 	 *
@@ -25,21 +31,26 @@ namespace BattleCity
 	 * <li> #tiles 地面。</li>
 	 * </ul>
 	 */
-	class Level : public Component
+	class Level : public GameComponent
 	{
 	protected:
 		Player * player;
-		list<Enemy> enemies;
-		list<Bullet> bullets;
-		vector<vector<Tile*>> tiles;
-
-		vector<Point> enemyBirthplace;
-		bool enemyBirth;
-		int enemyBirthCooldown;
-		list<Point> bushTiles;
+		EnemyController * enemies;
+		BulletController * bullets;
+		TileController * tiles;
 
 		LevelDrawing levelDrawing;
 		BITMAP * background;
+
+	public:
+		Level(Game & game);
+		~Level(void);
+
+	public:
+		// @override
+		void update(void);
+		// @override
+		void draw(void);
 
 	public:
 		void addBullet(Bullet & bullet);
@@ -56,25 +67,14 @@ namespace BattleCity
 
 		const LevelDrawing & getLevelDrawing(void) const;
 
+		bool collidedWithTile(Rectangle & rect);
+		bool collidedWithTank(Rectangle & rect);
+
 	public:
 		const Player * getPlayer(void) const;
 		const list<Enemy> & getEnemies(void) const;
 		const Tile * getTile(int x, int y) const;
 		const Tile * getTile(const Point & point) const;
-
-	public:
-		Level(Game & game);
-		~Level(void);
-
-		// @override
-		void update(void);
-		// @override
-		void draw(void);
-
-	protected:
-		void initTanks(void);
-		void initTiles(void);
-		void generateEnemy(void);
 	};
 
 
@@ -102,31 +102,7 @@ namespace BattleCity
 		return player;
 	}
 
-	inline const list<Enemy> & Level::getEnemies( void ) const {
-		return enemies;
-	}
-
-	inline const Tile * Level::getTile(int x, int y) const
-	{
-		if (x >= 0 && x < LEVEL_GRID_WIDTH &&
-			y >= 0 && y < LEVEL_GRID_HEIGHT)
-			return tiles[x][y];
-		else
-			return NULL;
-	}
-
-	inline const Tile * Level::getTile(const Point & point) const
-	{
-		int x = point.getX();
-		int y = point.getY();
-		return getTile(x, y);
-	}
-
 	inline const LevelDrawing & Level::getLevelDrawing(void) const {
 		return levelDrawing;
-	}
-
-	inline void Level::addBullet(Bullet & bullet) {
-		bullets.push_back(bullet);
 	}
 }

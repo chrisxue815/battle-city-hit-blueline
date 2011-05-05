@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "Game.h"
-#include "Component.h"
+#include "GameComponent.h"
 #include "ResourceManager.h"
 #include "TimeManager.h"
 #include "Player.h"
@@ -11,7 +11,7 @@
 
 namespace BattleCity
 {
-	class GameStateMonitor : public Component
+	class GameStateMonitor : public GameComponent
 	{
 	protected:
 		char notification[100];
@@ -29,7 +29,7 @@ namespace BattleCity
 	};
 
 	inline GameStateMonitor::GameStateMonitor(Game & game)
-		: Component(game)
+		: GameComponent(game)
 	{
 	}
 }
