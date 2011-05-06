@@ -14,44 +14,16 @@ namespace BattleCity
 		TimeSpan(int refreshRate, int ticks);
 		TimeSpan(int refreshRate, int seconds, int milliseconds);
 
-		int getTicks(void) const;
-		void setTicks(int);
+		int getTicks(void) const { return ticks; }
+		void setTicks(int val) { ticks = val; }
 
-		int getSeconds(void) const;
-		void setSeconds(int);
+		int getSeconds(void) const { return ticks / refreshRate; }
+		void setSeconds(int val) { ticks = refreshRate * val; }
 
-		int getMilliseconds(void) const;
-		void setMilliseconds(int);
+		int getMilliseconds(void) const { return ticks * 1000 / refreshRate; }
+		void setMilliseconds(int val) { ticks = refreshRate * val / 1000; }
+
+		int getRefreshRate(void) const { return refreshRate; }
+		void setRefreshRate(int val) { refreshRate = val; }
 	};
-
-
-	inline int TimeSpan::getTicks(void) const
-	{
-		return ticks;
-	}
-
-	inline void TimeSpan::setTicks(int ticks)
-	{
-		this->ticks = ticks;
-	}
-
-	inline int TimeSpan::getSeconds(void) const
-	{
-		return ticks / refreshRate;
-	}
-
-	inline void TimeSpan::setSeconds(int seconds)
-	{
-		this->ticks = refreshRate * seconds;
-	}
-
-	inline int TimeSpan::getMilliseconds(void) const
-	{
-		return ticks * 1000 / refreshRate;
-	}
-
-	inline void TimeSpan::setMilliseconds(int milliseconds)
-	{
-		this->ticks = refreshRate * milliseconds  / 1000;
-	}
 }

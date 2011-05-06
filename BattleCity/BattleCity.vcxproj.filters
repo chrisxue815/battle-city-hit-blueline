@@ -212,9 +212,6 @@
     <ClInclude Include="source\BattleCityMath.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="source\EnemyList.h">
-      <Filter>Header Files\LevelComponent</Filter>
-    </ClInclude>
     <ClInclude Include="source\GameComponent.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>

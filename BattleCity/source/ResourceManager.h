@@ -29,12 +29,11 @@ namespace BattleCity
 	class ResourceManager
 	{
 	protected:
-		char dirPath[MAX_PATH_SIZE];
 		char rootPath[MAX_PATH_SIZE];
 		BITMAP * texture[END_FRAME];
 
 	public:
-		ResourceManager(char * dirPath, char * rootPath);
+		ResourceManager(void);
 	protected:
 		~ResourceManager(void);
 

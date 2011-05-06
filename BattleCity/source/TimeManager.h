@@ -25,19 +25,8 @@ namespace BattleCity
 		bool next(void);
 		void update(void);
 
-		int getRefreshRate(void) const;
+		int getRefreshRate(void) const { return refreshRate; }
 		int getFps(void) const;
-		const TimeSpan & getInterval(void) const;
+		const TimeSpan & getInterval(void) const { return interval; }
 	};
-
-
-	inline int TimeManager::getRefreshRate(void) const
-	{
-		return refreshRate;
-	}
-
-	inline const TimeSpan & TimeManager::getInterval(void) const
-	{
-		return interval;
-	}
 }

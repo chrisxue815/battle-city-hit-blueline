@@ -9,11 +9,17 @@ Game::Game(void)
 	initGraphics();
 	install_keyboard();
 	install_timer();
-	initManager();
+	
+	// init managers
+	resource = new ResourceManager();
+	drawing = new DrawingManager();
+	timeManager = & TimeManager::getInstance();
 
+	// init game components
 	level = new Level(*this);
 	monitor = new GameStateMonitor(*this);
 
+	// misc
 	refreshRate = get_refresh_rate();
 	running = true;
 
@@ -42,17 +48,6 @@ void Game::initGraphics(void)
 	if (set_gfx_mode(GFX_AUTODETECT_WINDOWED, GAME_WIDTH, GAME_HEIGHT, 0, 0) != 0) {
 		throw GameException("Unable to set any graphic mode.", SET_GFX_MODE_EXCEPTION);
 	}
-}
-
-
-void Game::initManager(void)
-{
-	get_executable_name(exePath, sizeof(exePath));
-	replace_filename(dirPath, exePath, "", sizeof(dirPath));
-
-	resource = new ResourceManager(dirPath, "resource");
-	drawing = new DrawingManager();
-	timeManager = & TimeManager::getInstance();
 }
 
 
@@ -90,7 +85,9 @@ void Game::update(void)
 void Game::draw(void)
 {
 	drawing->clear();
+
 	level->draw();
 	monitor->draw();
+
 	drawing->flush();
 }

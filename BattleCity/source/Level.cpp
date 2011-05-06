@@ -39,8 +39,8 @@ void Level::update(void)
 
 void Level::draw(void)
 {
+	// 画背景图
 	DrawingManager & drawing = game.getDrawingManager();
-
 	draw_sprite(drawing.getBuffer(), background, LEVEL_X, LEVEL_Y);
 
 	tiles->draw();
@@ -48,7 +48,7 @@ void Level::draw(void)
 	enemies->draw();
 	bullets->draw();
 
-	// 把Bush显示在最上面
+	// 把Bush画在最上面
 	tiles->drawBushTiles();
 }
 

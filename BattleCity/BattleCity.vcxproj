@@ -124,7 +124,6 @@
     <ClInclude Include="source\EmptySpace.h" />
     <ClInclude Include="source\Enemy.h" />
     <ClInclude Include="source\EnemyController.h" />
-    <ClInclude Include="source\EnemyList.h" />
     <ClInclude Include="source\GameComponent.h" />
     <ClInclude Include="source\Ice.h" />
     <ClInclude Include="source\LevelComponent.h" />

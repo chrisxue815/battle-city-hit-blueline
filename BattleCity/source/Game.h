@@ -39,9 +39,6 @@ namespace BattleCity
 	class Game
 	{
 	protected:
-		char exePath[MAX_PATH_SIZE];
-		char dirPath[MAX_PATH_SIZE];
-
 		int width;
 		int height;
 
@@ -57,11 +54,11 @@ namespace BattleCity
 		GameStateMonitor * monitor;
 
 	public:
-		int getRefreshRate(void) const;
-		const TimeManager & getTimeManager(void) const;
-		const ResourceManager & getResourceManager(void) const;
-		DrawingManager & getDrawingManager(void);
-		int getMilliseconds(void) const;
+		int getRefreshRate(void) const { return refreshRate; }
+		const TimeManager & getTimeManager(void) const { return *timeManager; }
+		const ResourceManager & getResourceManager(void) const { return *resource; }
+		DrawingManager & getDrawingManager(void) { return *drawing; }
+		int getMilliseconds(void) const { return timeManager->getInterval().getMilliseconds(); }
 
 	public:
 		Game(void);
@@ -74,27 +71,5 @@ namespace BattleCity
 
 	private:
 		void initGraphics(void);
-		void initManager(void);
 	};
-
-
-	inline int Game::getRefreshRate(void) const {
-		return refreshRate;
-	}
-
-	inline const TimeManager & Game::getTimeManager(void) const {
-		return *timeManager;
-	}
-
-	inline const ResourceManager & Game::getResourceManager(void) const {
-		return *resource;
-	}
-
-	inline DrawingManager & Game::getDrawingManager(void) {
-		return *drawing;
-	}
-
-	inline int Game::getMilliseconds(void) const {
-		return timeManager->getInterval().getMilliseconds();
-	}
 }

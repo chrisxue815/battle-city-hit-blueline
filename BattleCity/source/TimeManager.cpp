@@ -2,7 +2,7 @@
 using namespace BattleCity;
 
 
-// game ticks
+// for game ticks
 static volatile int gameTicks = 0;
 static void gameTicks_proc(void)
 {
@@ -10,7 +10,8 @@ static void gameTicks_proc(void)
 }
 END_OF_FUNCTION(gameTicks_proc);
 
-// fps
+
+// for fps
 static volatile int frameCount = 0;
 static volatile int fps = 0;
 static void fps_proc(void)
@@ -22,7 +23,7 @@ END_OF_FUNCTION(fps_proc);
 
 
 TimeManager::TimeManager(void)
-	: interval(60)
+	: interval(0)
 {
 	LOCK_VARIABLE(gameTicks);
 	LOCK_FUNCTION(gameTicks_proc);
@@ -51,8 +52,11 @@ void TimeManager::begin(int refreshRate)
 	if (this->refreshRate != refreshRate)
 	{
 		this->refreshRate = refreshRate;
+
 		remove_int(gameTicks_proc);
 		install_int_ex(gameTicks_proc, BPS_TO_TIMER(refreshRate));
+
+		interval.setRefreshRate(refreshRate);
 	}
 
 	this->ticks = gameTicks;
