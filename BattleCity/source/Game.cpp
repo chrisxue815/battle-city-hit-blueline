@@ -9,6 +9,8 @@ Game::Game(void)
 	initGraphics();
 	install_keyboard();
 	install_timer();
+
+	set_config_file("config.ini");
 	
 	// init managers
 	resource = new ResourceManager();

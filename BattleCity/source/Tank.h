@@ -8,13 +8,7 @@
 namespace BattleCity
 {
 	class Level;
-
-	// 玩家的子弹不会打中玩家，敌军的子弹不会打中敌军
-	enum TankType
-	{
-		PLAYER_TANK,
-		ENEMY_TANK
-	};
+	enum BulletType;
 
 	class Tank : public Entity
 	{
@@ -43,7 +37,8 @@ namespace BattleCity
 	public:
 		// @override
 		void draw(void);
-		virtual TankType getTankType(void) const = 0;
+
+		virtual BulletType getBulletType(void) const = 0;
 
 	protected:
 		void init(void);

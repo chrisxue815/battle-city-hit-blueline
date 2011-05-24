@@ -52,10 +52,42 @@ void Enemy::loadContent(void)
 {
 	const ResourceManager & resource = level.getResourceManager();
 
-	upTexture = resource.getBitmap(PLAYER1_UP_FRAME);
-	downTexture = resource.getBitmap(PLAYER1_DOWN_FRAME);
-	leftTexture = resource.getBitmap(PLAYER1_LEFT_FRAME);
-	rightTexture = resource.getBitmap(PLAYER1_RIGHT_FRAME);
+	BitmapFrame upFrame;
+	BitmapFrame downFrame;
+	BitmapFrame leftFrame;
+	BitmapFrame rightFrame;
+
+	switch (enemyType)
+	{
+	case ENEMY_HIGH_SPEED:
+		upFrame = ENEMY2_UP_FRAME;
+		downFrame = ENEMY2_DOWN_FRAME;
+		leftFrame = ENEMY2_LEFT_FRAME;
+		rightFrame = ENEMY2_RIGHT_FRAME;
+		break;
+	case ENEMY_HIGH_ARMOR:
+		upFrame = ENEMY3_UP_FRAME;
+		downFrame = ENEMY3_DOWN_FRAME;
+		leftFrame = ENEMY3_LEFT_FRAME;
+		rightFrame = ENEMY3_RIGHT_FRAME;
+		break;
+	case ENEMY_HIGH_DAMAGE:
+		upFrame = ENEMY4_UP_FRAME;
+		downFrame = ENEMY4_DOWN_FRAME;
+		leftFrame = ENEMY4_LEFT_FRAME;
+		rightFrame = ENEMY4_RIGHT_FRAME;
+		break;
+	case ENEMY_NORMAL:
+		upFrame = ENEMY1_UP_FRAME;
+		downFrame = ENEMY1_DOWN_FRAME;
+		leftFrame = ENEMY1_LEFT_FRAME;
+		rightFrame = ENEMY1_RIGHT_FRAME;
+	}
+
+	upTexture = resource.getBitmap(upFrame);
+	downTexture = resource.getBitmap(downFrame);
+	leftTexture = resource.getBitmap(leftFrame);
+	rightTexture = resource.getBitmap(rightFrame);
 
 	current = upTexture;
 }

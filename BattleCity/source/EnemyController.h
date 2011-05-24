@@ -21,8 +21,11 @@ namespace BattleCity
 
 		static const int ENEMY_BIRTH_COOLDOWN = 1000;
 
+		BITMAP * birthplaceTexture;
+
 	public:
 		EnemyController(Level & level);
+		~EnemyController(void);
 
 	public:
 		void update(void);

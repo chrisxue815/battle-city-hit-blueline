@@ -10,12 +10,22 @@ EnemyController::EnemyController( Level & level )
 	add(Enemy(level, ENEMY_NORMAL));
 	add(Enemy(level, ENEMY_HIGH_SPEED));
 	add(Enemy(level, ENEMY_HIGH_ARMOR));
+
 	enemyBirthplace.push_back(Point(0, 0));
 	enemyBirthplace.push_back(Point(10, 0));
 	enemyBirthplace.push_back(Point(20, 0));
 	enemyBirthplace.push_back(Point(30, 0));
+
 	maxEnemyNumber = 3;
 	enemyBirthCooldown = ENEMY_BIRTH_COOLDOWN;
+
+	birthplaceTexture = level.getResourceManager().getBitmap(ENEMY_BIRTHPLACE_FRAME);
+}
+
+
+EnemyController::~EnemyController(void)
+{
+	destroy_bitmap(birthplaceTexture);
 }
 
 
@@ -32,7 +42,7 @@ void EnemyController::update( void )
 			++it;
 	}
 
-	if (enemies.size() < maxEnemyNumber && !enemiesQueuing.empty())
+	if ((int)enemies.size() < maxEnemyNumber && !enemiesQueuing.empty())
 	{
 		if (enemyBirthCooldown > 0)
 		{
@@ -56,6 +66,14 @@ void EnemyController::add(Enemy & enemy, int num)
 
 void EnemyController::draw( void )
 {
+	BITMAP * buffer = level.getDrawingManager().getBuffer();
+
+	for (int i = 0; i < (int)enemyBirthplace.size(); i++)
+	{
+		Point & p = level.getLevelDrawing().getScreenPoint(enemyBirthplace[i]);
+		draw_sprite(buffer, birthplaceTexture, p.getX(), p.getY());
+	}
+
 	for (list<Enemy>::iterator it = enemies.begin(); it != enemies.end(); ++it) {
 		it->draw();
 	}

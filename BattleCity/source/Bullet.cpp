@@ -1,16 +1,17 @@
 ﻿#include "Bullet.h"
 #include "Level.h"
 #include "Player.h"
+#include "Point.h"
 #include "Enemy.h"
 #include "Tile.h"
 #include "BattleCityMath.h"
 using namespace BattleCity;
 
 
-Bullet::Bullet(Level & level, const Tank * shooter, const Point & point, Direction direction)
+Bullet::Bullet(Level & level, BulletType type, const Point & point, Direction direction)
 	: Entity(level, Rectangle(point, 0, 0))
 {
-	this->shooter = shooter;
+	this->type = type;
 	this->direction = direction;
 	offset = 0;
 
@@ -109,7 +110,7 @@ void Bullet::collisionDetection(void)
 	}
 
 	// hit the player
-	if (shooter->getTankType() != PLAYER_TANK)
+	if (type != PLAYER_BULLET)
 	{
 		const Player * player = level.getPlayer();
 		const Rectangle & playerRect = player->getRect();
@@ -122,7 +123,7 @@ void Bullet::collisionDetection(void)
 	}
 
 	// hit enemies
-	if (shooter->getTankType() != ENEMY_TANK)
+	if (type != ENEMY_BULLET)
 	{
 		const list<Enemy> & enemies  = level.getEnemies();
 

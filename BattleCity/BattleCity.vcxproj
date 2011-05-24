@@ -64,13 +64,16 @@
       <AdditionalDependencies>alleg.lib;alpng.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuild>
-      <Command>xcopy /y "%(Identity)" "$(OutDir)\%(RelativeDir)"</Command>
+      <Command>
+      </Command>
     </CustomBuild>
     <CustomBuild>
-      <Message>copy resources</Message>
+      <Message>
+      </Message>
     </CustomBuild>
     <CustomBuild>
-      <Outputs>$(OutDir)\%(Identity)</Outputs>
+      <Outputs>
+      </Outputs>
     </CustomBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -119,6 +122,7 @@
     <ClInclude Include="source\Brick.h" />
     <ClInclude Include="source\Bullet.h" />
     <ClInclude Include="source\BulletController.h" />
+    <ClInclude Include="source\BulletType.h" />
     <ClInclude Include="source\Bush.h" />
     <ClInclude Include="source\DrawingManager.h" />
     <ClInclude Include="source\EmptySpace.h" />

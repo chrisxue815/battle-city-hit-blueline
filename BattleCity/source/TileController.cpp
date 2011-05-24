@@ -55,8 +55,8 @@ TileController::TileController(Level & level)
 
 TileController::~TileController()
 {
-	for (int i = 0; i < tiles.size(); i++) {
-		for (int j = 0; j < tiles[i].size(); j++) {
+	for (int i = 0; i < (int)tiles.size(); i++) {
+		for (int j = 0; j < (int)tiles[i].size(); j++) {
 			delete tiles[i][j];
 		}
 	}

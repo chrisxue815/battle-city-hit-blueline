@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "BulletType.h"
 #include "Tank.h"
 #include "Point.h"
 #include "BattleCityMath.h"
@@ -34,7 +35,7 @@ namespace BattleCity
 		// @override
 		void update(void);
 		// @override
-		TankType getTankType(void) const { return ENEMY_TANK; }
+		BulletType getBulletType(void) const { return ENEMY_BULLET; }
 
 	protected:
 		void init(EnemyType enemyType);

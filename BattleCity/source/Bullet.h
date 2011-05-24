@@ -1,20 +1,21 @@
 ﻿#pragma once
 
+#include "BulletType.h"
 #include "Entity.h"
-#include "Tank.h"
-#include "Point.h"
 #include "Macro.h"
 #include <allegro.h>
 
 
 namespace BattleCity
 {
+	class Point;
+
 	class Bullet : public Entity
 	{
 	protected:
 		static const int MS_PER_GRID = 50;
 
-		const Tank * shooter;
+		BulletType type;
 		Direction direction;
 		Point directionVector;
 		int offset;
@@ -22,7 +23,7 @@ namespace BattleCity
 		BITMAP * texture;
 
 	public:
-		Bullet(Level & level, const Tank * shooter, const Point & point, Direction direction);
+		Bullet(Level & level, BulletType type, const Point & point, Direction direction);
 
 	public:
 		// @override

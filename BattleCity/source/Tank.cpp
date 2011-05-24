@@ -136,7 +136,7 @@ void Tank::shoot(int milliseconds)
 		bulletDirection = RIGHT;
 	}
 
-	Bullet bullet(level, this, bulletPosition, bulletDirection);
+	Bullet bullet(level, this->getBulletType(), bulletPosition, bulletDirection);
 	level.addBullet(bullet);
 }
 

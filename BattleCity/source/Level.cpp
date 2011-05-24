@@ -44,8 +44,8 @@ void Level::draw(void)
 	draw_sprite(drawing.getBuffer(), background, LEVEL_X, LEVEL_Y);
 
 	tiles->draw();
-	player->draw();
 	enemies->draw();
+	player->draw();
 	bullets->draw();
 
 	// 把Bush画在最上面

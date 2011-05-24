@@ -227,6 +227,9 @@
     <ClInclude Include="source\EnemyController.h">
       <Filter>Header Files\LevelComponent</Filter>
     </ClInclude>
+    <ClInclude Include="source\BulletType.h">
+      <Filter>Header Files\LevelComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="resource\texture\scene1\brick.bmp">
