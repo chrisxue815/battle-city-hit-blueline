@@ -1,12 +1,14 @@
-glob:Debug/*
-glob:ipch/*
-glob:BattleCity/BattleCity.aps
-glob:BattleCity/BattleCity.vcxproj.user
-glob:BattleCity.opensdf
-glob:BattleCity.sdf
-glob:BattleCity.suo
-glob:doc/*
-glob:testResource/*
-glob:*.vsp
 syntax: glob
 BattleCity/test/*
+Debug/*
+Release/*
+ipch/*
+BattleCity/BattleCity.aps
+BattleCity/BattleCity.vcxproj.user
+BattleCity.opensdf
+BattleCity.sdf
+BattleCity.suo
+doc/*
+testResource/*
+*.vsp
+_ReSharper.*
